@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hypixel/refs/heads/main/json-schema/hypixel-public-api-game-schema.json",
+  "title": "Game",
+  "description": "Information about a specific game. When a field is not present you should fallback to the provided default if there is one, required fields will always exist.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "The backend ID of the game.",
+      "example": 1
+    },
+    "name": {
+      "type": "string",
+      "description": "The display name of the game.",
+      "example": "Bed Wars"
+    },
+    "databaseName": {
+      "type": "string",
+      "description": "The key used for database storage, such as for stats.",
+      "example": "Bedwars"
+    },
+    "modeNames": {
+      "type": "object",
+      "description": "A map of mode key to display name",
+      "example": {
+        "solo_normal": "Solo",
+        "team_normal": "Doubles"
+      }
+    },
+    "retired": {
+      "type": "boolean",
+      "description": "True if the game is retired and no longer playable.",
+      "default": false,
+      "example": false
+    },
+    "legacy": {
+      "type": "boolean",
+      "description": "True if the game is legacy and part of the Classic Lobby.",
+      "default": false,
+      "example": false
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "databaseName"
+  ],
+  "example": {
+    "id": 58,
+    "name": "Bed Wars",
+    "databaseName": "Bedwars",
+    "modeNames": {
+      "BEDWARS_TWO_FOUR": "4v4",
+      "BEDWARS_EIGHT_ONE": "Solo"
+    }
+  }
+}

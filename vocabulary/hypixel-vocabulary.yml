@@ -1,0 +1,774 @@
+vocabulary: 1.0.0
+info:
+  provider: Hypixel
+  description: Unified vocabulary for Hypixel Public API mapping the operational dimension (OpenAPI) and the capability dimension
+    (Naftiko) for the official Hypixel Minecraft network API.
+  created: '2026-05-30'
+  modified: '2026-05-30'
+operational:
+  apis:
+  - name: Hypixel Public API
+    namespace: hypixel
+    version: v2
+    baseUrl: https://api.hypixel.net
+    status: active
+  resources:
+  - name: player
+    path: /v2/player
+    api: Hypixel Public API
+    actions:
+    - getPlayer
+    tags:
+    - Player Data
+  - name: recentgames
+    path: /v2/recentgames
+    api: Hypixel Public API
+    actions:
+    - getRecentgames
+    tags:
+    - Player Data
+  - name: status
+    path: /v2/status
+    api: Hypixel Public API
+    actions:
+    - getStatus
+    tags:
+    - Player Data
+  - name: guild
+    path: /v2/guild
+    api: Hypixel Public API
+    actions:
+    - getGuild
+    tags:
+    - Player Data
+  - name: games
+    path: /v2/resources/games
+    api: Hypixel Public API
+    actions:
+    - getResourcesGames
+    tags:
+    - Resources
+  - name: achievements
+    path: /v2/resources/achievements
+    api: Hypixel Public API
+    actions:
+    - getResourcesAchievements
+    tags:
+    - Resources
+  - name: challenges
+    path: /v2/resources/challenges
+    api: Hypixel Public API
+    actions:
+    - getResourcesChallenges
+    tags:
+    - Resources
+  - name: quests
+    path: /v2/resources/quests
+    api: Hypixel Public API
+    actions:
+    - getResourcesQuests
+    tags:
+    - Resources
+  - name: achievements
+    path: /v2/resources/guilds/achievements
+    api: Hypixel Public API
+    actions:
+    - getResourcesGuildsAchievements
+    tags:
+    - Resources
+  - name: pets
+    path: /v2/resources/vanity/pets
+    api: Hypixel Public API
+    actions:
+    - getResourcesVanityPets
+    tags:
+    - Resources
+  - name: companions
+    path: /v2/resources/vanity/companions
+    api: Hypixel Public API
+    actions:
+    - getResourcesVanityCompanions
+    tags:
+    - Resources
+  - name: collections
+    path: /v2/resources/skyblock/collections
+    api: Hypixel Public API
+    actions:
+    - getResourcesSkyblockCollections
+    tags:
+    - SkyBlock
+  - name: skills
+    path: /v2/resources/skyblock/skills
+    api: Hypixel Public API
+    actions:
+    - getResourcesSkyblockSkills
+    tags:
+    - SkyBlock
+  - name: items
+    path: /v2/resources/skyblock/items
+    api: Hypixel Public API
+    actions:
+    - getResourcesSkyblockItems
+    tags:
+    - SkyBlock
+  - name: election
+    path: /v2/resources/skyblock/election
+    api: Hypixel Public API
+    actions:
+    - getResourcesSkyblockElection
+    tags:
+    - SkyBlock
+  - name: bingo
+    path: /v2/resources/skyblock/bingo
+    api: Hypixel Public API
+    actions:
+    - getResourcesSkyblockBingo
+    tags:
+    - SkyBlock
+  - name: news
+    path: /v2/skyblock/news
+    api: Hypixel Public API
+    actions:
+    - getSkyblockNews
+    tags:
+    - SkyBlock
+  - name: auction
+    path: /v2/skyblock/auction
+    api: Hypixel Public API
+    actions:
+    - getSkyblockAuction
+    tags:
+    - SkyBlock
+  - name: auctions
+    path: /v2/skyblock/auctions
+    api: Hypixel Public API
+    actions:
+    - getSkyblockAuctions
+    tags:
+    - SkyBlock
+  - name: auctions_ended
+    path: /v2/skyblock/auctions_ended
+    api: Hypixel Public API
+    actions:
+    - getSkyblockAuctionsEnded
+    tags:
+    - SkyBlock
+  - name: bazaar
+    path: /v2/skyblock/bazaar
+    api: Hypixel Public API
+    actions:
+    - getSkyblockBazaar
+    tags:
+    - SkyBlock
+  - name: profile
+    path: /v2/skyblock/profile
+    api: Hypixel Public API
+    actions:
+    - getSkyblockProfile
+    tags:
+    - SkyBlock
+  - name: profiles
+    path: /v2/skyblock/profiles
+    api: Hypixel Public API
+    actions:
+    - getSkyblockProfiles
+    tags:
+    - SkyBlock
+  - name: museum
+    path: /v2/skyblock/museum
+    api: Hypixel Public API
+    actions:
+    - getSkyblockMuseum
+    tags:
+    - SkyBlock
+  - name: garden
+    path: /v2/skyblock/garden
+    api: Hypixel Public API
+    actions:
+    - getSkyblockGarden
+    tags:
+    - SkyBlock
+  - name: bingo
+    path: /v2/skyblock/bingo
+    api: Hypixel Public API
+    actions:
+    - getSkyblockBingo
+    tags:
+    - SkyBlock
+  - name: firesales
+    path: /v2/skyblock/firesales
+    api: Hypixel Public API
+    actions:
+    - getSkyblockFiresales
+    tags:
+    - SkyBlock
+  - name: active
+    path: /v2/housing/active
+    api: Hypixel Public API
+    actions:
+    - getHousingActive
+    tags:
+    - Housing
+  - name: house
+    path: /v2/housing/house
+    api: Hypixel Public API
+    actions:
+    - getHousingHouse
+    tags:
+    - Housing
+  - name: houses
+    path: /v2/housing/houses
+    api: Hypixel Public API
+    actions:
+    - getHousingHouses
+    tags:
+    - Housing
+  - name: boosters
+    path: /v2/boosters
+    api: Hypixel Public API
+    actions:
+    - getBoosters
+    tags:
+    - Other
+  - name: counts
+    path: /v2/counts
+    api: Hypixel Public API
+    actions:
+    - getCounts
+    tags:
+    - Other
+  - name: leaderboards
+    path: /v2/leaderboards
+    api: Hypixel Public API
+    actions:
+    - getLeaderboards
+    tags:
+    - Other
+  - name: punishmentstats
+    path: /v2/punishmentstats
+    api: Hypixel Public API
+    actions:
+    - getPunishmentstats
+    tags:
+    - Other
+  actions:
+  - name: get
+    httpMethod: GET
+    pattern: read
+    description: Fetch a resource
+  - name: list
+    httpMethod: GET
+    pattern: query
+    description: List a collection of resources
+  schemas:
+    boosters:
+    - name: Booster
+      properties:
+      - _id
+      - purchaserUuid
+      - amount
+      - originalLength
+      - length
+      - gameType
+      - dateActivated
+    - name: ActiveBooster
+      properties: []
+    - name: QueuedBooster
+      properties: []
+    skyblock:
+    - name: SkyBlockAuction
+      properties:
+      - _id
+      - uuid
+      - auctioneer
+      - profile_id
+      - coop
+      - start
+      - end
+      - item_name
+      - item_lore
+      - extra
+      - category
+      - tier
+      - starting_bid
+      - item_bytes
+      - claimed
+      - claimed_bidders
+      - highest_bid_amount
+      - bids
+    - name: SkyBlockProfile
+      properties:
+      - profile_id
+      - members
+      - cute_name
+      - selected
+      - community_upgrades
+      - banking
+      - game_mode
+    - name: SkyBlockItem
+      properties:
+      - id
+      - material
+      - name
+      - tier
+      - color
+      - skin
+    - name: SkyBlockMuseum
+      properties:
+      - value
+      - appraisal
+      - items
+      - special
+    - name: SkyBlockFireSale
+      properties:
+      - item_id
+      - start
+      - end
+      - amount
+      - price
+    - name: SkyBlockGarden
+      properties:
+      - uuid
+      - commission_data
+      - composter_data
+      - active_commissions
+      - resources_collected
+      - crop_upgrade_levels
+      - unlocked_plots_ids
+      - garden_experience
+      - unlocked_barn_skins
+      - selected_barn_skin
+    resources:
+    - name: Game
+      properties:
+      - id
+      - name
+      - databaseName
+      - modeNames
+      - retired
+      - legacy
+    housing:
+    - name: HousingHouse
+      properties:
+      - uuid
+      - owner
+      - name
+      - createdAt
+      - players
+      - cookies
+  parameters:
+    identifiers:
+    - name: uuid
+      in: query
+      description: The uuid parameter.
+    - name: player
+      in: query
+      description: The player parameter.
+    - name: name
+      in: query
+      description: The name parameter.
+    - name: profile
+      in: query
+      description: The profile UUID that you wish to request
+    filters:
+    - name: id
+      in: query
+      description: The id parameter.
+    - name: house
+      in: query
+      description: The UUID of the house to get information about.
+    pagination:
+    - name: page
+      in: query
+      description: The page parameter.
+  enums:
+    tier:
+    - COMMON
+    - UNCOMMON
+    - RARE
+    - EPIC
+    - LEGENDARY
+    - MYTHIC
+    - SUPREME
+    - SPECIAL
+    - VERY_SPECIAL
+  authentication:
+    schemes:
+    - name: ApiKey
+      type: apiKey
+      in: header
+      header: API-Key
+    note: All endpoints require an API-Key header from the Hypixel Developer Dashboard.
+capability:
+  workflows:
+  - name: Hypixel Public API — Housing
+    file: capabilities/hypixel-public-api-housing.yaml
+    description: Housing surface of the Hypixel Public API.
+    api: Hypixel Public API
+    tools: 3
+    consumes_namespace: hypixel-public-api-housing
+    rest_namespace: hypixel-public-api-housing-rest
+    mcp_namespace: hypixel-public-api-housing-mcp
+    tags:
+    - Hypixel
+    - Gaming
+    - Minecraft
+    - Housing
+  - name: Hypixel Public API — Other
+    file: capabilities/hypixel-public-api-other.yaml
+    description: Other surface of the Hypixel Public API.
+    api: Hypixel Public API
+    tools: 4
+    consumes_namespace: hypixel-public-api-other
+    rest_namespace: hypixel-public-api-other-rest
+    mcp_namespace: hypixel-public-api-other-mcp
+    tags:
+    - Hypixel
+    - Gaming
+    - Minecraft
+    - Other
+  - name: Hypixel Public API — Player Data
+    file: capabilities/hypixel-public-api-player-data.yaml
+    description: Player Data surface of the Hypixel Public API.
+    api: Hypixel Public API
+    tools: 4
+    consumes_namespace: hypixel-public-api-player-data
+    rest_namespace: hypixel-public-api-player-data-rest
+    mcp_namespace: hypixel-public-api-player-data-mcp
+    tags:
+    - Hypixel
+    - Gaming
+    - Minecraft
+    - Player Data
+  - name: Hypixel Public API — Resources
+    file: capabilities/hypixel-public-api-resources.yaml
+    description: Resources surface of the Hypixel Public API.
+    api: Hypixel Public API
+    tools: 7
+    consumes_namespace: hypixel-public-api-resources
+    rest_namespace: hypixel-public-api-resources-rest
+    mcp_namespace: hypixel-public-api-resources-mcp
+    tags:
+    - Hypixel
+    - Gaming
+    - Minecraft
+    - Resources
+  - name: Hypixel Public API — SkyBlock
+    file: capabilities/hypixel-public-api-skyblock.yaml
+    description: SkyBlock surface of the Hypixel Public API.
+    api: Hypixel Public API
+    tools: 16
+    consumes_namespace: hypixel-public-api-skyblock
+    rest_namespace: hypixel-public-api-skyblock-rest
+    mcp_namespace: hypixel-public-api-skyblock-mcp
+    tags:
+    - Hypixel
+    - Gaming
+    - Minecraft
+    - Skyblock
+  personas:
+  - id: minecraft-player
+    name: Minecraft / Hypixel Player
+    description: Hypixel network player looking up their own or another player's stats, profile, friends, or guild.
+    workflows:
+    - Hypixel Public API — Player Data
+    - Hypixel Public API — Other
+  - id: skyblock-trader
+    name: SkyBlock Trader / Flipper
+    description: SkyBlock player using auction house and bazaar data for flipping, arbitrage, and profit analysis.
+    workflows:
+    - Hypixel Public API — SkyBlock
+  - id: tooling-developer
+    name: Third-Party Tooling Developer
+    description: Developer building public stats sites, Discord bots, leaderboards, or museum/collection trackers on top of
+      the API.
+    workflows:
+    - Hypixel Public API — Player Data
+    - Hypixel Public API — Resources
+    - Hypixel Public API — SkyBlock
+    - Hypixel Public API — Housing
+    - Hypixel Public API — Other
+  - id: community-moderator
+    name: Community Moderator / Researcher
+    description: Community moderator or researcher tracking watchdog/staff ban statistics over time.
+    workflows:
+    - Hypixel Public API — Other
+  domains:
+  - name: Player
+    description: Player profiles, recent games, online status, and guild lookups.
+    resources:
+    - player
+    - recentgames
+    - status
+    - guild
+  - name: SkyBlock
+    description: SkyBlock economy, profiles, museum, garden, bingo, fire sales.
+    resources:
+    - profile
+    - profiles
+    - auction
+    - auctions
+    - bazaar
+    - museum
+    - garden
+    - bingo
+    - firesales
+    - news
+  - name: Housing
+    description: Hypixel Housing public houses.
+    resources:
+    - active
+    - house
+    - houses
+  - name: Network
+    description: Network-wide telemetry — counts, boosters, leaderboards, punishment statistics.
+    resources:
+    - counts
+    - boosters
+    - leaderboards
+    - punishmentstats
+  - name: Reference
+    description: Static reference catalogs — games, achievements, challenges, quests, vanity items, SkyBlock collections/skills/items.
+    resources:
+    - games
+    - achievements
+    - challenges
+    - quests
+    - pets
+    - companions
+    - collections
+    - skills
+    - items
+    - election
+  namespaces:
+    consumed:
+    - hypixel-public-api-housing
+    - hypixel-public-api-other
+    - hypixel-public-api-player-data
+    - hypixel-public-api-resources
+    - hypixel-public-api-skyblock
+    rest:
+    - hypixel-public-api-housing-rest
+    - hypixel-public-api-other-rest
+    - hypixel-public-api-player-data-rest
+    - hypixel-public-api-resources-rest
+    - hypixel-public-api-skyblock-rest
+    mcp:
+    - hypixel-public-api-housing-mcp
+    - hypixel-public-api-other-mcp
+    - hypixel-public-api-player-data-mcp
+    - hypixel-public-api-resources-mcp
+    - hypixel-public-api-skyblock-mcp
+  binds:
+  - name: HYPIXEL_API_KEY
+    workflows:
+    - Hypixel Public API — Housing
+    - Hypixel Public API — Other
+    - Hypixel Public API — Player Data
+    - Hypixel Public API — Resources
+    - Hypixel Public API — SkyBlock
+crossReference:
+- resource: player
+  path: /v2/player
+  operations:
+  - getPlayer
+  tags:
+  - Player Data
+- resource: recentgames
+  path: /v2/recentgames
+  operations:
+  - getRecentgames
+  tags:
+  - Player Data
+- resource: status
+  path: /v2/status
+  operations:
+  - getStatus
+  tags:
+  - Player Data
+- resource: guild
+  path: /v2/guild
+  operations:
+  - getGuild
+  tags:
+  - Player Data
+- resource: games
+  path: /v2/resources/games
+  operations:
+  - getResourcesGames
+  tags:
+  - Resources
+- resource: achievements
+  path: /v2/resources/achievements
+  operations:
+  - getResourcesAchievements
+  tags:
+  - Resources
+- resource: challenges
+  path: /v2/resources/challenges
+  operations:
+  - getResourcesChallenges
+  tags:
+  - Resources
+- resource: quests
+  path: /v2/resources/quests
+  operations:
+  - getResourcesQuests
+  tags:
+  - Resources
+- resource: achievements
+  path: /v2/resources/guilds/achievements
+  operations:
+  - getResourcesGuildsAchievements
+  tags:
+  - Resources
+- resource: pets
+  path: /v2/resources/vanity/pets
+  operations:
+  - getResourcesVanityPets
+  tags:
+  - Resources
+- resource: companions
+  path: /v2/resources/vanity/companions
+  operations:
+  - getResourcesVanityCompanions
+  tags:
+  - Resources
+- resource: collections
+  path: /v2/resources/skyblock/collections
+  operations:
+  - getResourcesSkyblockCollections
+  tags:
+  - SkyBlock
+- resource: skills
+  path: /v2/resources/skyblock/skills
+  operations:
+  - getResourcesSkyblockSkills
+  tags:
+  - SkyBlock
+- resource: items
+  path: /v2/resources/skyblock/items
+  operations:
+  - getResourcesSkyblockItems
+  tags:
+  - SkyBlock
+- resource: election
+  path: /v2/resources/skyblock/election
+  operations:
+  - getResourcesSkyblockElection
+  tags:
+  - SkyBlock
+- resource: bingo
+  path: /v2/resources/skyblock/bingo
+  operations:
+  - getResourcesSkyblockBingo
+  tags:
+  - SkyBlock
+- resource: news
+  path: /v2/skyblock/news
+  operations:
+  - getSkyblockNews
+  tags:
+  - SkyBlock
+- resource: auction
+  path: /v2/skyblock/auction
+  operations:
+  - getSkyblockAuction
+  tags:
+  - SkyBlock
+- resource: auctions
+  path: /v2/skyblock/auctions
+  operations:
+  - getSkyblockAuctions
+  tags:
+  - SkyBlock
+- resource: auctions_ended
+  path: /v2/skyblock/auctions_ended
+  operations:
+  - getSkyblockAuctionsEnded
+  tags:
+  - SkyBlock
+- resource: bazaar
+  path: /v2/skyblock/bazaar
+  operations:
+  - getSkyblockBazaar
+  tags:
+  - SkyBlock
+- resource: profile
+  path: /v2/skyblock/profile
+  operations:
+  - getSkyblockProfile
+  tags:
+  - SkyBlock
+- resource: profiles
+  path: /v2/skyblock/profiles
+  operations:
+  - getSkyblockProfiles
+  tags:
+  - SkyBlock
+- resource: museum
+  path: /v2/skyblock/museum
+  operations:
+  - getSkyblockMuseum
+  tags:
+  - SkyBlock
+- resource: garden
+  path: /v2/skyblock/garden
+  operations:
+  - getSkyblockGarden
+  tags:
+  - SkyBlock
+- resource: bingo
+  path: /v2/skyblock/bingo
+  operations:
+  - getSkyblockBingo
+  tags:
+  - SkyBlock
+- resource: firesales
+  path: /v2/skyblock/firesales
+  operations:
+  - getSkyblockFiresales
+  tags:
+  - SkyBlock
+- resource: active
+  path: /v2/housing/active
+  operations:
+  - getHousingActive
+  tags:
+  - Housing
+- resource: house
+  path: /v2/housing/house
+  operations:
+  - getHousingHouse
+  tags:
+  - Housing
+- resource: houses
+  path: /v2/housing/houses
+  operations:
+  - getHousingHouses
+  tags:
+  - Housing
+- resource: boosters
+  path: /v2/boosters
+  operations:
+  - getBoosters
+  tags:
+  - Other
+- resource: counts
+  path: /v2/counts
+  operations:
+  - getCounts
+  tags:
+  - Other
+- resource: leaderboards
+  path: /v2/leaderboards
+  operations:
+  - getLeaderboards
+  tags:
+  - Other
+- resource: punishmentstats
+  path: /v2/punishmentstats
+  operations:
+  - getPunishmentstats
+  tags:
+  - Other

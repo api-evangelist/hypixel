@@ -1,0 +1,158 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Hypixel Public API — Housing
+  description: 'Housing surface of the Hypixel Public API. 3 operations. Lead operation: Hypixel The Currently Active Public
+    Houses.. Self-contained Naftiko capability covering one Hypixel business surface.'
+  tags:
+  - Hypixel
+  - Gaming
+  - Minecraft
+  - Housing
+  created: '2026-05-30'
+  modified: '2026-05-30'
+binds:
+- namespace: env
+  keys:
+    HYPIXEL_API_KEY: HYPIXEL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: hypixel-public-api-housing
+    baseUri: https://api.hypixel.net/v2
+    description: Hypixel Public API — Housing business capability. Self-contained, no shared references.
+    authentication:
+      type: apikey
+      key: API-Key
+      value: '{{env.HYPIXEL_API_KEY}}'
+      placement: header
+    resources:
+    - name: v2-housing-active
+      path: /housing/active
+      operations:
+      - name: getHousingActive
+        method: GET
+        description: Hypixel The Currently Active Public Houses.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-housing-house
+      path: /housing/house
+      operations:
+      - name: getHousingHouse
+        method: GET
+        description: Hypixel Information About a Specific House.
+        inputParameters:
+        - name: house
+          in: query
+          type: string
+          required: true
+          description: The UUID of the house to get information about.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-housing-houses
+      path: /housing/houses
+      operations:
+      - name: getHousingHouses
+        method: GET
+        description: Hypixel The Public Houses for a Specific Player.
+        inputParameters:
+        - name: player
+          in: query
+          type: string
+          required: false
+          description: The UUID of the player to get houses for.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: hypixel-public-api-housing-rest
+    port: 8080
+    description: REST adapter for Hypixel Public API — Housing. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/housing/active
+      name: v2-housing-active
+      description: REST surface for /v2/housing/active.
+      operations:
+      - method: GET
+        name: getHousingActive
+        description: Hypixel The Currently Active Public Houses.
+        call: hypixel-public-api-housing.getHousingActive
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/housing/house
+      name: v2-housing-house
+      description: REST surface for /v2/housing/house.
+      operations:
+      - method: GET
+        name: getHousingHouse
+        description: Hypixel Information About a Specific House.
+        call: hypixel-public-api-housing.getHousingHouse
+        with:
+          house: rest.house
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/housing/houses
+      name: v2-housing-houses
+      description: REST surface for /v2/housing/houses.
+      operations:
+      - method: GET
+        name: getHousingHouses
+        description: Hypixel The Public Houses for a Specific Player.
+        call: hypixel-public-api-housing.getHousingHouses
+        with:
+          player: rest.player
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: hypixel-public-api-housing-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Hypixel Public API — Housing. One verb-noun tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: currently-active-public-houses
+      description: Hypixel The Currently Active Public Houses.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hypixel-public-api-housing.getHousingActive
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: information-about-specific-house
+      description: Hypixel Information About a Specific House.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hypixel-public-api-housing.getHousingHouse
+      with:
+        house: tools.house
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: public-houses-specific-player
+      description: Hypixel The Public Houses for a Specific Player.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hypixel-public-api-housing.getHousingHouses
+      with:
+        player: tools.player
+      outputParameters:
+      - type: object
+        mapping: $.

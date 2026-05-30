@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hypixel/refs/heads/main/json-structure/hypixel-public-api-sky-block-profile-structure.json",
+  "name": "SkyBlockProfile",
+  "description": "SkyBlockProfile schema from Hypixel Public API",
+  "type": "object",
+  "properties": {
+    "profile_id": {
+      "type": "uuid",
+      "example": "ad8fefaa8351454bb739a4eaa872173f"
+    },
+    "members": {
+      "description": "A map of member UUIDs to member profiles objects",
+      "type": "object",
+      "properties": {
+        "player_id": {
+          "type": "uuid",
+          "example": "ad8fefaa8351454bb739a4eaa872173f"
+        },
+        "profile": {
+          "type": "object",
+          "properties": {
+            "deletion_notice": {
+              "description": "If this field exists, the member profile is marked as deleted",
+              "nullable": true,
+              "type": "object",
+              "properties": {
+                "timestamp": {
+                  "type": "int64",
+                  "example": 1748544600000
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "cute_name": {
+      "description": "The cute name of the profile, only provided on the profiles endpoint",
+      "nullable": true,
+      "type": "string",
+      "example": "ExamplePlayer"
+    },
+    "selected": {
+      "description": "Whether or not this is the currently selected profile, only provided on the profiles endpoint",
+      "nullable": true,
+      "type": "boolean",
+      "example": true
+    },
+    "community_upgrades": {
+      "nullable": true,
+      "type": "object"
+    },
+    "banking": {
+      "description": "Information about the bank account for this profile, only present if the API banking setting is enabled",
+      "nullable": true,
+      "type": "object",
+      "properties": {
+        "balance": {
+          "type": "double",
+          "example": 1.0
+        },
+        "transactions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "timestamp": {
+                "type": "integer",
+                "format": "int64",
+                "example": 1748544600000
+              },
+              "action": {
+                "type": "string",
+                "enum": [
+                  "DEPOSIT",
+                  "WITHDRAW"
+                ],
+                "example": "DEPOSIT"
+              },
+              "initiator_name": {
+                "type": "string",
+                "example": "ExamplePlayer"
+              },
+              "amount": {
+                "type": "number",
+                "format": "double",
+                "example": 1.0
+              }
+            }
+          }
+        }
+      }
+    },
+    "game_mode": {
+      "description": "The SkyBlock game mode of the profile, not present if normal mode",
+      "nullable": true,
+      "type": "string",
+      "enum": [
+        "ironman",
+        "island",
+        "bingo"
+      ],
+      "example": "ironman"
+    }
+  }
+}

@@ -1,0 +1,323 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "hypixel": "https://developer.hypixel.net/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "SkyBlockItem": "hypixel:SkyBlockItem",
+    "SkyBlockGarden": "hypixel:SkyBlockGarden",
+    "SkyBlockFireSale": "hypixel:SkyBlockFireSale",
+    "SkyBlockMuseum": "hypixel:SkyBlockMuseum",
+    "Booster": "hypixel:Booster",
+    "Game": "hypixel:Game",
+    "HousingHouse": "hypixel:HousingHouse",
+    "SkyBlockAuction": "hypixel:SkyBlockAuction",
+    "SkyBlockProfile": "hypixel:SkyBlockProfile",
+    "id": {
+      "@id": "hypixel:id",
+      "@type": "xsd:string"
+    },
+    "material": {
+      "@id": "hypixel:material",
+      "@type": "xsd:string"
+    },
+    "name": "schema:name",
+    "tier": {
+      "@id": "hypixel:tier",
+      "@type": "xsd:string"
+    },
+    "color": {
+      "@id": "hypixel:color",
+      "@type": "xsd:string"
+    },
+    "skin": {
+      "@id": "hypixel:skin",
+      "@type": "xsd:string"
+    },
+    "uuid": {
+      "@id": "hypixel:uuid",
+      "@type": "xsd:string"
+    },
+    "commissionData": {
+      "@id": "hypixel:commission_data",
+      "@type": "@id"
+    },
+    "visits": {
+      "@id": "hypixel:visits",
+      "@type": "@id"
+    },
+    "completed": {
+      "@id": "hypixel:completed",
+      "@type": "@id"
+    },
+    "totalCompleted": {
+      "@id": "hypixel:total_completed",
+      "@type": "xsd:integer"
+    },
+    "uniqueNpcsServed": {
+      "@id": "hypixel:unique_npcs_served",
+      "@type": "xsd:integer"
+    },
+    "composterData": {
+      "@id": "hypixel:composter_data",
+      "@type": "@id"
+    },
+    "activeCommissions": {
+      "@id": "hypixel:active_commissions",
+      "@type": "@id"
+    },
+    "resourcesCollected": {
+      "@id": "hypixel:resources_collected",
+      "@type": "@id"
+    },
+    "cropUpgradeLevels": {
+      "@id": "hypixel:crop_upgrade_levels",
+      "@type": "@id"
+    },
+    "unlockedPlotsIds": {
+      "@id": "hypixel:unlocked_plots_ids",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "gardenExperience": {
+      "@id": "hypixel:garden_experience",
+      "@type": "xsd:integer"
+    },
+    "unlockedBarnSkins": {
+      "@id": "hypixel:unlocked_barn_skins",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "selectedBarnSkin": {
+      "@id": "hypixel:selected_barn_skin",
+      "@type": "xsd:string"
+    },
+    "itemId": {
+      "@id": "hypixel:item_id",
+      "@type": "xsd:string"
+    },
+    "start": {
+      "@id": "hypixel:start",
+      "@type": "xsd:decimal"
+    },
+    "end": {
+      "@id": "hypixel:end",
+      "@type": "xsd:decimal"
+    },
+    "amount": {
+      "@id": "hypixel:amount",
+      "@type": "xsd:integer"
+    },
+    "price": {
+      "@id": "hypixel:price",
+      "@type": "xsd:integer"
+    },
+    "value": {
+      "@id": "hypixel:value",
+      "@type": "xsd:long"
+    },
+    "appraisal": {
+      "@id": "hypixel:appraisal",
+      "@type": "xsd:boolean"
+    },
+    "items": {
+      "@id": "hypixel:items",
+      "@type": "@id"
+    },
+    "special": {
+      "@id": "hypixel:special",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "donatedTime": {
+      "@id": "hypixel:donated_time",
+      "@type": "xsd:long"
+    },
+    "Id": {
+      "@id": "hypixel:_id",
+      "@type": "xsd:string"
+    },
+    "purchaserUuid": {
+      "@id": "hypixel:purchaserUuid",
+      "@type": "xsd:string"
+    },
+    "originalLength": {
+      "@id": "hypixel:originalLength",
+      "@type": "xsd:integer"
+    },
+    "length": {
+      "@id": "hypixel:length",
+      "@type": "xsd:integer"
+    },
+    "gameType": {
+      "@id": "hypixel:gameType",
+      "@type": "xsd:integer"
+    },
+    "dateActivated": {
+      "@id": "hypixel:dateActivated",
+      "@type": "xsd:long"
+    },
+    "databaseName": {
+      "@id": "hypixel:databaseName",
+      "@type": "xsd:string"
+    },
+    "modeNames": {
+      "@id": "hypixel:modeNames",
+      "@type": "@id"
+    },
+    "retired": {
+      "@id": "hypixel:retired",
+      "@type": "xsd:boolean"
+    },
+    "legacy": {
+      "@id": "hypixel:legacy",
+      "@type": "xsd:boolean"
+    },
+    "owner": {
+      "@id": "hypixel:owner",
+      "@type": "xsd:string"
+    },
+    "createdAt": "schema:dateCreated",
+    "players": {
+      "@id": "hypixel:players",
+      "@type": "xsd:decimal"
+    },
+    "cookies": {
+      "@id": "hypixel:cookies",
+      "@type": "@id"
+    },
+    "current": {
+      "@id": "hypixel:current",
+      "@type": "xsd:decimal"
+    },
+    "auctioneer": {
+      "@id": "hypixel:auctioneer",
+      "@type": "xsd:string"
+    },
+    "profileId": {
+      "@id": "hypixel:profile_id",
+      "@type": "xsd:string"
+    },
+    "coop": {
+      "@id": "hypixel:coop",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "itemName": {
+      "@id": "hypixel:item_name",
+      "@type": "xsd:string"
+    },
+    "itemLore": {
+      "@id": "hypixel:item_lore",
+      "@type": "xsd:string"
+    },
+    "extra": {
+      "@id": "hypixel:extra",
+      "@type": "xsd:string"
+    },
+    "category": {
+      "@id": "hypixel:category",
+      "@type": "xsd:string"
+    },
+    "startingBid": {
+      "@id": "hypixel:starting_bid",
+      "@type": "xsd:decimal"
+    },
+    "itemBytes": {
+      "@id": "hypixel:item_bytes",
+      "@type": "@id"
+    },
+    "type": {
+      "@id": "hypixel:type",
+      "@type": "xsd:decimal"
+    },
+    "data": {
+      "@id": "hypixel:data",
+      "@type": "xsd:string"
+    },
+    "claimed": {
+      "@id": "hypixel:claimed",
+      "@type": "xsd:boolean"
+    },
+    "claimedBidders": {
+      "@id": "hypixel:claimed_bidders",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "highestBidAmount": {
+      "@id": "hypixel:highest_bid_amount",
+      "@type": "xsd:decimal"
+    },
+    "bids": {
+      "@id": "hypixel:bids",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "auctionId": {
+      "@id": "hypixel:auction_id",
+      "@type": "xsd:string"
+    },
+    "bidder": {
+      "@id": "hypixel:bidder",
+      "@type": "xsd:string"
+    },
+    "timestamp": {
+      "@id": "hypixel:timestamp",
+      "@type": "xsd:long"
+    },
+    "members": {
+      "@id": "hypixel:members",
+      "@type": "@id"
+    },
+    "playerId": {
+      "@id": "hypixel:player_id",
+      "@type": "xsd:string"
+    },
+    "profile": {
+      "@id": "hypixel:profile",
+      "@type": "@id"
+    },
+    "deletionNotice": {
+      "@id": "hypixel:deletion_notice",
+      "@type": "@id"
+    },
+    "cuteName": {
+      "@id": "hypixel:cute_name",
+      "@type": "xsd:string"
+    },
+    "selected": {
+      "@id": "hypixel:selected",
+      "@type": "xsd:boolean"
+    },
+    "communityUpgrades": {
+      "@id": "hypixel:community_upgrades",
+      "@type": "@id"
+    },
+    "banking": {
+      "@id": "hypixel:banking",
+      "@type": "@id"
+    },
+    "balance": {
+      "@id": "hypixel:balance",
+      "@type": "xsd:double"
+    },
+    "transactions": {
+      "@id": "hypixel:transactions",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "action": {
+      "@id": "hypixel:action",
+      "@type": "xsd:string"
+    },
+    "initiatorName": {
+      "@id": "hypixel:initiator_name",
+      "@type": "xsd:string"
+    },
+    "gameMode": {
+      "@id": "hypixel:game_mode",
+      "@type": "xsd:string"
+    }
+  }
+}

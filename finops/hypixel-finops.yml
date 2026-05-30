@@ -1,0 +1,107 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Hypixel
+providerId: hypixel
+created: '2026-05-30'
+modified: '2026-05-30'
+reconciled: false
+tags:
+  - FinOps
+  - FOCUS
+  - Gaming
+  - Minecraft
+  - Public API
+description: >-
+  FOCUS-aligned FinOps view for Hypixel Public API. Hypixel does not charge for
+  API access — there are no invoices, no metered cloud spend, and no usage
+  fees. The "cost" surface is therefore the cost of the consumer's own
+  infrastructure and the API-key rate-limit budget. This artifact still models
+  the FOCUS-shaped meters consumers should track (per-key requests, per-key
+  remaining quota, per-application key inventory) so that downstream FinOps
+  tooling can normalize Hypixel alongside paid providers.
+sources:
+  - https://developer.hypixel.net/
+  - https://developer.hypixel.net/policies
+  - https://api.hypixel.net/
+  - https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Hypixel Inc.
+serviceCategory: Gaming Network API
+billingModel:
+  pricingCategory: Free Tiered Access
+  billingFrequency: Not Applicable (no invoice issued)
+  billingCurrency: USD (not applicable — API is free)
+  chargeCategories:
+    - Usage
+focusColumns:
+  ServiceName: Hypixel Public API
+  ServiceCategory: Gaming Network API
+  ProviderName: Hypixel
+  PublisherName: Hypixel Inc.
+  InvoiceIssuerName: Not Applicable
+  BillingCurrency: USD
+  ChargeCategory: Usage
+meters:
+  - name: api_requests
+    unit: request
+    aggregation: sum
+    dimensions:
+      - api_key
+      - application_tier
+      - endpoint
+      - response_status
+  - name: rate_limit_remaining
+    unit: request
+    aggregation: min
+    dimensions:
+      - api_key
+      - window
+  - name: api_key_count
+    unit: key
+    aggregation: count
+    dimensions:
+      - application_tier
+      - status
+  - name: throttled_responses
+    unit: request
+    aggregation: count
+    dimensions:
+      - api_key
+      - endpoint
+principles:
+  - name: Visibility
+    description: >-
+      Read the RateLimit-Limit / RateLimit-Remaining / RateLimit-Reset
+      response headers on every Hypixel API response, persist them per key,
+      and surface them on a dashboard alongside endpoint-level call counts.
+      There is no invoice or billing API — the response headers are the
+      authoritative usage signal.
+  - name: Allocation
+    description: >-
+      Allocate consumption to internal teams or products via the
+      "application" boundary in the Hypixel Developer Dashboard — each
+      product that consumes the API should own its own application/key so
+      that usage and rate-limit consumption are attributable.
+  - name: Optimization
+    description: >-
+      Hypixel explicitly recommends caching to reduce request volume. Cache
+      static reference endpoints (/resources/games, /resources/achievements,
+      /resources/skyblock/items) aggressively — they change infrequently. For
+      polling-heavy endpoints (player, guild, status) cache hot keys and
+      respect Hypixel's "reasonable intervals" guidance (e.g. once-per-hour
+      per player for guild tracking). Production-tier applications should
+      request a higher rate limit only after caching is exhausted as a
+      lever.
+  - name: Accountability
+    description: >-
+      A single owner per application/key is required by Hypixel's policy.
+      That owner is responsible for monitoring 429s, rotating short-lived
+      Personal keys, keeping the application active (zero-request windows
+      over 14 days trigger key deletion), and complying with the free-tier
+      and transformative-use clauses of the Developer Policy.

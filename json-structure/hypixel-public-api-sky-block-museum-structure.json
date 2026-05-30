@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hypixel/refs/heads/main/json-structure/hypixel-public-api-sky-block-museum-structure.json",
+  "name": "SkyBlockMuseum",
+  "description": "SkyBlockMuseum schema from Hypixel Public API",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "int64",
+      "example": 1748544600000
+    },
+    "appraisal": {
+      "type": "boolean",
+      "example": true
+    },
+    "items": {
+      "type": "object"
+    },
+    "special": {
+      "type": "array",
+      "properties": {
+        "donated_time": {
+          "type": "int64",
+          "example": 1748544600000
+        },
+        "items": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

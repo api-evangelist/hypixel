@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hypixel/refs/heads/main/json-schema/hypixel-public-api-sky-block-garden-schema.json",
+  "title": "SkyBlockGarden",
+  "description": "Information about a player's SkyBlock garden, the only guaranteed field is the `uuid` field.",
+  "type": "object",
+  "properties": {
+    "uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The UUID of the profile for this garden.",
+      "example": "ad8fefaa8351454bb739a4eaa872173f"
+    },
+    "commission_data": {
+      "type": "object",
+      "properties": {
+        "visits": {
+          "type": "object",
+          "description": "A map of visitor identifier to visit count",
+          "example": {
+            "jerry": 1,
+            "jacob": 2,
+            "andrew": 3
+          }
+        },
+        "completed": {
+          "type": "object",
+          "description": "A map of visitor identifier to completed count",
+          "example": {
+            "jerry": 1,
+            "jacob": 1,
+            "andrew": 2
+          }
+        },
+        "total_completed": {
+          "type": "integer",
+          "format": "int32",
+          "example": 42
+        },
+        "unique_npcs_served": {
+          "type": "integer",
+          "format": "int32",
+          "example": 42
+        }
+      }
+    },
+    "composter_data": {
+      "type": "object",
+      "example": {
+        "organic_matter": 1772.8,
+        "fuel_units": 17000,
+        "compost_units": 0,
+        "compost_items": 2,
+        "conversion_ticks": 300,
+        "last_save": 1721039418436,
+        "upgrades": {
+          "speed": 25,
+          "multi_drop": 25,
+          "fuel_cap": 22,
+          "organic_matter_cap": 25,
+          "cost_reduction": 25
+        }
+      }
+    },
+    "active_commissions": {
+      "type": "object",
+      "example": {
+        "liam": {
+          "requirement": [
+            {
+              "original_item": "NETHER_STALK",
+              "original_amount": 93995,
+              "item": "MUTANT_NETHER_STALK",
+              "amount": 4
+            }
+          ],
+          "status": "NOT_STARTED",
+          "position": 1
+        },
+        "lumberjack": {
+          "requirement": [
+            {
+              "original_item": "POTATO_ITEM",
+              "original_amount": 81380,
+              "item": "ENCHANTED_BAKED_POTATO",
+              "amount": 3
+            }
+          ],
+          "status": "NOT_STARTED",
+          "position": 2
+        },
+        "oringo": {
+          "requirement": [
+            {
+              "original_item": "WHEAT",
+              "original_amount": 26798,
+              "item": "ENCHANTED_HAY_BLOCK",
+              "amount": 21
+            }
+          ],
+          "status": "NOT_STARTED",
+          "position": 3
+        },
+        "rhys": {
+          "requirement": [
+            {
+              "original_item": "JACK_O_LANTERN",
+              "original_amount": 512,
+              "item": "JACK_O_LANTERN",
+              "amount": 512
+            }
+          ],
+          "status": "NOT_STARTED",
+          "position": 4
+        },
+        "fear_mongerer": {
+          "requirement": [
+            {
+              "original_item": "PUMPKIN",
+              "original_amount": 27709,
+              "item": "POLISHED_PUMPKIN",
+              "amount": 1
+            }
+          ],
+          "status": "NOT_STARTED",
+          "position": 5,
+          "extra_rewards": [
+            {
+              "candy": "PURPLE_CANDY"
+            }
+          ]
+        }
+      }
+    },
+    "resources_collected": {
+      "type": "object",
+      "description": "A map of resource ID to amount collected",
+      "example": {
+        "WHEAT": 100,
+        "POTATO_ITEM": 100,
+        "INK_SACK:3": 100
+      }
+    },
+    "crop_upgrade_levels": {
+      "type": "object",
+      "example": {
+        "WHEAT": 1,
+        "POTATO_ITEM": 2,
+        "INK_SACK:3": 3
+      }
+    },
+    "unlocked_plots_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "beginner_1",
+        "intermediate_3"
+      ]
+    },
+    "garden_experience": {
+      "type": "integer",
+      "format": "double",
+      "example": 42
+    },
+    "unlocked_barn_skins": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "selected_barn_skin": {
+      "type": "string",
+      "example": "example"
+    }
+  },
+  "required": [
+    "uuid"
+  ]
+}

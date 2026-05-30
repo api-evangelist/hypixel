@@ -1,0 +1,26 @@
+{
+  "profile_id": "ad8fefaa8351454bb739a4eaa872173f",
+  "members": {
+    "player_id": "ad8fefaa8351454bb739a4eaa872173f",
+    "profile": {
+      "deletion_notice": {
+        "timestamp": 1748544600000
+      }
+    }
+  },
+  "cute_name": "ExamplePlayer",
+  "selected": true,
+  "community_upgrades": {},
+  "banking": {
+    "balance": 1.0,
+    "transactions": [
+      {
+        "timestamp": 1748544600000,
+        "action": "DEPOSIT",
+        "initiator_name": "ExamplePlayer",
+        "amount": 1.0
+      }
+    ]
+  },
+  "game_mode": "ironman"
+}

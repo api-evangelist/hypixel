@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hypixel/refs/heads/main/json-structure/hypixel-public-api-active-booster-structure.json",
+  "name": "ActiveBooster",
+  "description": "ActiveBooster schema from Hypixel Public API",
+  "allOf": [
+    {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "5fcbf9d9d295e80a766f3b14"
+        },
+        "purchaserUuid": {
+          "type": "uuid",
+          "example": "ad8fefaa8351454bb739a4eaa872173f"
+        },
+        "amount": {
+          "type": "double",
+          "example": 1.0
+        },
+        "originalLength": {
+          "type": "int32",
+          "example": 42
+        },
+        "length": {
+          "type": "int32",
+          "example": 42
+        },
+        "gameType": {
+          "type": "int32",
+          "example": 42
+        },
+        "dateActivated": {
+          "type": "int64",
+          "example": 1748544600000
+        }
+      }
+    },
+    {
+      "type": "object",
+      "properties": {
+        "stacked": {
+          "type": "array",
+          "nullable": true,
+          "items": {
+            "type": "string",
+            "description": "UUID of the player in a dashed format",
+            "format": "uuid",
+            "example": "ad8fefaa-8351-454b-b739-a4eaa872173f"
+          }
+        }
+      }
+    }
+  ]
+}

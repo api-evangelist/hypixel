@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/hypixel/refs/heads/main/json-structure/hypixel-public-api-sky-block-item-structure.json",
+  "name": "SkyBlockItem",
+  "description": "SkyBlockItem schema from Hypixel Public API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique identifier for this item",
+      "type": "string",
+      "example": "500123"
+    },
+    "material": {
+      "description": "The Bukkit material enum value for the item",
+      "type": "string",
+      "example": "example"
+    },
+    "name": {
+      "description": "The name of the item",
+      "type": "string",
+      "example": "ExamplePlayer"
+    },
+    "tier": {
+      "description": "The rarity tier of the item",
+      "type": "string",
+      "enum": [
+        "COMMON",
+        "UNCOMMON",
+        "RARE",
+        "EPIC",
+        "LEGENDARY",
+        "MYTHIC",
+        "SUPREME",
+        "SPECIAL",
+        "VERY_SPECIAL"
+      ],
+      "example": "COMMON"
+    },
+    "color": {
+      "description": "The color metadata to be applied to an item, usually leather armor pieces",
+      "pattern": "^(?:(?:^|,\\s*)([01]?\\d\\d?|2[0-4]\\d|25[0-5])){3}$",
+      "type": "string",
+      "example": "example"
+    },
+    "skin": {
+      "description": "The skin value for a skull based item",
+      "type": "string",
+      "example": "example"
+    }
+  },
+  "example": {
+    "material": "LEATHER_CHESTPLATE",
+    "color": "255,215,0",
+    "name": "Farm Armor Chestplate",
+    "category": "CHESTPLATE",
+    "tier": "RARE",
+    "stats": {
+      "DEFENSE": 75,
+      "HEALTH": 20
+    },
+    "npc_sell_price": 5200,
+    "id": "FARM_ARMOR_CHESTPLATE"
+  }
+}

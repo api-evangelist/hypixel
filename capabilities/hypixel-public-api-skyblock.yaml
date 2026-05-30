@@ -1,0 +1,638 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Hypixel Public API — SkyBlock
+  description: 'SkyBlock surface of the Hypixel Public API. 16 operations. Lead operation: Hypixel Collections. Self-contained
+    Naftiko capability covering one Hypixel business surface.'
+  tags:
+  - Hypixel
+  - Gaming
+  - Minecraft
+  - Skyblock
+  created: '2026-05-30'
+  modified: '2026-05-30'
+binds:
+- namespace: env
+  keys:
+    HYPIXEL_API_KEY: HYPIXEL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: hypixel-public-api-skyblock
+    baseUri: https://api.hypixel.net/v2
+    description: Hypixel Public API — SkyBlock business capability. Self-contained, no shared references.
+    authentication:
+      type: apikey
+      key: API-Key
+      value: '{{env.HYPIXEL_API_KEY}}'
+      placement: header
+    resources:
+    - name: v2-resources-skyblock-collections
+      path: /resources/skyblock/collections
+      operations:
+      - name: getResourcesSkyblockCollections
+        method: GET
+        description: Hypixel Collections
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-resources-skyblock-skills
+      path: /resources/skyblock/skills
+      operations:
+      - name: getResourcesSkyblockSkills
+        method: GET
+        description: Hypixel Skills
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-resources-skyblock-items
+      path: /resources/skyblock/items
+      operations:
+      - name: getResourcesSkyblockItems
+        method: GET
+        description: Hypixel Items
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-resources-skyblock-election
+      path: /resources/skyblock/election
+      operations:
+      - name: getResourcesSkyblockElection
+        method: GET
+        description: Hypixel Election and Mayor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-resources-skyblock-bingo
+      path: /resources/skyblock/bingo
+      operations:
+      - name: getResourcesSkyblockBingo
+        method: GET
+        description: Hypixel Current Bingo Event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-skyblock-news
+      path: /skyblock/news
+      operations:
+      - name: getSkyblockNews
+        method: GET
+        description: Hypixel News
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-skyblock-auction
+      path: /skyblock/auction
+      operations:
+      - name: getSkyblockAuction
+        method: GET
+        description: Hypixel Request Auction(s) by the Auction UUID, Player UUID, or Profile UUID.
+        inputParameters:
+        - name: uuid
+          in: query
+          type: string
+          required: false
+          description: The auction UUID that you wish to request
+        - name: player
+          in: query
+          type: string
+          required: false
+          description: The player UUID that you wish to request
+        - name: profile
+          in: query
+          type: string
+          required: false
+          description: The profile UUID that you wish to request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-skyblock-auctions
+      path: /skyblock/auctions
+      operations:
+      - name: getSkyblockAuctions
+        method: GET
+        description: Hypixel Active Auctions
+        inputParameters:
+        - name: page
+          in: query
+          type: number
+          required: false
+          description: The page parameter.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-skyblock-auctions-ended
+      path: /skyblock/auctions_ended
+      operations:
+      - name: getSkyblockAuctionsEnded
+        method: GET
+        description: Hypixel Recently Ended Auctions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-skyblock-bazaar
+      path: /skyblock/bazaar
+      operations:
+      - name: getSkyblockBazaar
+        method: GET
+        description: Hypixel Bazaar
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-skyblock-profile
+      path: /skyblock/profile
+      operations:
+      - name: getSkyblockProfile
+        method: GET
+        description: Hypixel Profile by UUID
+        inputParameters:
+        - name: profile
+          in: query
+          type: string
+          required: false
+          description: The profile parameter.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-skyblock-profiles
+      path: /skyblock/profiles
+      operations:
+      - name: getSkyblockProfiles
+        method: GET
+        description: Hypixel Profiles by Player
+        inputParameters:
+        - name: uuid
+          in: query
+          type: string
+          required: false
+          description: The uuid parameter.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-skyblock-museum
+      path: /skyblock/museum
+      operations:
+      - name: getSkyblockMuseum
+        method: GET
+        description: Hypixel Museum Data by Profile ID
+        inputParameters:
+        - name: profile
+          in: query
+          type: string
+          required: false
+          description: The profile parameter.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-skyblock-garden
+      path: /skyblock/garden
+      operations:
+      - name: getSkyblockGarden
+        method: GET
+        description: Hypixel Garden Data by Profile ID
+        inputParameters:
+        - name: profile
+          in: query
+          type: string
+          required: false
+          description: The profile parameter.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-skyblock-bingo
+      path: /skyblock/bingo
+      operations:
+      - name: getSkyblockBingo
+        method: GET
+        description: Hypixel Bingo Data by Player
+        inputParameters:
+        - name: uuid
+          in: query
+          type: string
+          required: false
+          description: The uuid parameter.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-skyblock-firesales
+      path: /skyblock/firesales
+      operations:
+      - name: getSkyblockFiresales
+        method: GET
+        description: Hypixel Active/Upcoming Fire Sales
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: hypixel-public-api-skyblock-rest
+    port: 8080
+    description: REST adapter for Hypixel Public API — SkyBlock. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/resources/skyblock/collections
+      name: v2-resources-skyblock-collections
+      description: REST surface for /v2/resources/skyblock/collections.
+      operations:
+      - method: GET
+        name: getResourcesSkyblockCollections
+        description: Hypixel Collections
+        call: hypixel-public-api-skyblock.getResourcesSkyblockCollections
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/resources/skyblock/skills
+      name: v2-resources-skyblock-skills
+      description: REST surface for /v2/resources/skyblock/skills.
+      operations:
+      - method: GET
+        name: getResourcesSkyblockSkills
+        description: Hypixel Skills
+        call: hypixel-public-api-skyblock.getResourcesSkyblockSkills
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/resources/skyblock/items
+      name: v2-resources-skyblock-items
+      description: REST surface for /v2/resources/skyblock/items.
+      operations:
+      - method: GET
+        name: getResourcesSkyblockItems
+        description: Hypixel Items
+        call: hypixel-public-api-skyblock.getResourcesSkyblockItems
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/resources/skyblock/election
+      name: v2-resources-skyblock-election
+      description: REST surface for /v2/resources/skyblock/election.
+      operations:
+      - method: GET
+        name: getResourcesSkyblockElection
+        description: Hypixel Election and Mayor
+        call: hypixel-public-api-skyblock.getResourcesSkyblockElection
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/resources/skyblock/bingo
+      name: v2-resources-skyblock-bingo
+      description: REST surface for /v2/resources/skyblock/bingo.
+      operations:
+      - method: GET
+        name: getResourcesSkyblockBingo
+        description: Hypixel Current Bingo Event
+        call: hypixel-public-api-skyblock.getResourcesSkyblockBingo
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/skyblock/news
+      name: v2-skyblock-news
+      description: REST surface for /v2/skyblock/news.
+      operations:
+      - method: GET
+        name: getSkyblockNews
+        description: Hypixel News
+        call: hypixel-public-api-skyblock.getSkyblockNews
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/skyblock/auction
+      name: v2-skyblock-auction
+      description: REST surface for /v2/skyblock/auction.
+      operations:
+      - method: GET
+        name: getSkyblockAuction
+        description: Hypixel Request Auction(s) by the Auction UUID, Player UUID, or Profile UUID.
+        call: hypixel-public-api-skyblock.getSkyblockAuction
+        with:
+          uuid: rest.uuid
+          player: rest.player
+          profile: rest.profile
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/skyblock/auctions
+      name: v2-skyblock-auctions
+      description: REST surface for /v2/skyblock/auctions.
+      operations:
+      - method: GET
+        name: getSkyblockAuctions
+        description: Hypixel Active Auctions
+        call: hypixel-public-api-skyblock.getSkyblockAuctions
+        with:
+          page: rest.page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/skyblock/auctions-ended
+      name: v2-skyblock-auctions-ended
+      description: REST surface for /v2/skyblock/auctions_ended.
+      operations:
+      - method: GET
+        name: getSkyblockAuctionsEnded
+        description: Hypixel Recently Ended Auctions
+        call: hypixel-public-api-skyblock.getSkyblockAuctionsEnded
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/skyblock/bazaar
+      name: v2-skyblock-bazaar
+      description: REST surface for /v2/skyblock/bazaar.
+      operations:
+      - method: GET
+        name: getSkyblockBazaar
+        description: Hypixel Bazaar
+        call: hypixel-public-api-skyblock.getSkyblockBazaar
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/skyblock/profile
+      name: v2-skyblock-profile
+      description: REST surface for /v2/skyblock/profile.
+      operations:
+      - method: GET
+        name: getSkyblockProfile
+        description: Hypixel Profile by UUID
+        call: hypixel-public-api-skyblock.getSkyblockProfile
+        with:
+          profile: rest.profile
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/skyblock/profiles
+      name: v2-skyblock-profiles
+      description: REST surface for /v2/skyblock/profiles.
+      operations:
+      - method: GET
+        name: getSkyblockProfiles
+        description: Hypixel Profiles by Player
+        call: hypixel-public-api-skyblock.getSkyblockProfiles
+        with:
+          uuid: rest.uuid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/skyblock/museum
+      name: v2-skyblock-museum
+      description: REST surface for /v2/skyblock/museum.
+      operations:
+      - method: GET
+        name: getSkyblockMuseum
+        description: Hypixel Museum Data by Profile ID
+        call: hypixel-public-api-skyblock.getSkyblockMuseum
+        with:
+          profile: rest.profile
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/skyblock/garden
+      name: v2-skyblock-garden
+      description: REST surface for /v2/skyblock/garden.
+      operations:
+      - method: GET
+        name: getSkyblockGarden
+        description: Hypixel Garden Data by Profile ID
+        call: hypixel-public-api-skyblock.getSkyblockGarden
+        with:
+          profile: rest.profile
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/skyblock/bingo
+      name: v2-skyblock-bingo
+      description: REST surface for /v2/skyblock/bingo.
+      operations:
+      - method: GET
+        name: getSkyblockBingo
+        description: Hypixel Bingo Data by Player
+        call: hypixel-public-api-skyblock.getSkyblockBingo
+        with:
+          uuid: rest.uuid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/skyblock/firesales
+      name: v2-skyblock-firesales
+      description: REST surface for /v2/skyblock/firesales.
+      operations:
+      - method: GET
+        name: getSkyblockFiresales
+        description: Hypixel Active/Upcoming Fire Sales
+        call: hypixel-public-api-skyblock.getSkyblockFiresales
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: hypixel-public-api-skyblock-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Hypixel Public API — SkyBlock. One verb-noun tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: collections
+      description: Hypixel Collections
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hypixel-public-api-skyblock.getResourcesSkyblockCollections
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: skills
+      description: Hypixel Skills
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hypixel-public-api-skyblock.getResourcesSkyblockSkills
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: items
+      description: Hypixel Items
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hypixel-public-api-skyblock.getResourcesSkyblockItems
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: election-mayor
+      description: Hypixel Election and Mayor
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hypixel-public-api-skyblock.getResourcesSkyblockElection
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: current-bingo-event
+      description: Hypixel Current Bingo Event
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hypixel-public-api-skyblock.getResourcesSkyblockBingo
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: news
+      description: Hypixel News
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hypixel-public-api-skyblock.getSkyblockNews
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: request-auction-s-auction-uuid
+      description: Hypixel Request Auction(s) by the Auction UUID, Player UUID, or Profile UUID.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hypixel-public-api-skyblock.getSkyblockAuction
+      with:
+        uuid: tools.uuid
+        player: tools.player
+        profile: tools.profile
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: active-auctions
+      description: Hypixel Active Auctions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hypixel-public-api-skyblock.getSkyblockAuctions
+      with:
+        page: tools.page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: recently-ended-auctions
+      description: Hypixel Recently Ended Auctions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hypixel-public-api-skyblock.getSkyblockAuctionsEnded
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: bazaar
+      description: Hypixel Bazaar
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hypixel-public-api-skyblock.getSkyblockBazaar
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: profile-uuid
+      description: Hypixel Profile by UUID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hypixel-public-api-skyblock.getSkyblockProfile
+      with:
+        profile: tools.profile
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: profiles-player
+      description: Hypixel Profiles by Player
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hypixel-public-api-skyblock.getSkyblockProfiles
+      with:
+        uuid: tools.uuid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: museum-data-profile-id
+      description: Hypixel Museum Data by Profile ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hypixel-public-api-skyblock.getSkyblockMuseum
+      with:
+        profile: tools.profile
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: garden-data-profile-id
+      description: Hypixel Garden Data by Profile ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hypixel-public-api-skyblock.getSkyblockGarden
+      with:
+        profile: tools.profile
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: bingo-data-player
+      description: Hypixel Bingo Data by Player
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hypixel-public-api-skyblock.getSkyblockBingo
+      with:
+        uuid: tools.uuid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: active-upcoming-fire-sales
+      description: Hypixel Active/Upcoming Fire Sales
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hypixel-public-api-skyblock.getSkyblockFiresales
+      outputParameters:
+      - type: object
+        mapping: $.

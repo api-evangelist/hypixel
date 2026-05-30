@@ -1,0 +1,111 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Hypixel
+providerId: hypixel
+created: '2026-05-30'
+modified: '2026-05-30'
+reconciled: false
+tags:
+  - Gaming
+  - Minecraft
+  - Player Stats
+  - SkyBlock
+  - Public API
+description: >-
+  Hypixel Public API is offered as a free, key-based service. There are no paid
+  tiers — instead, Hypixel grants two application classes via the Developer
+  Dashboard (https://developer.hypixel.net). "Personal" keys are issued to any
+  signed-in user on a short (default 3-day) rotation and are intended for
+  guild-tracking or hobby use. "Production" applications require a written
+  request and unlock longer-lived keys plus permission to run monetized
+  services. Hypixel's policy mandates that any monetized application using the
+  API must offer a free tier of access to all users; gating raw API content
+  behind a paywall is not permitted unless the gated experience is
+  "transformative." All commercial terms (revenue share, support tiers, paid
+  feeds) are explicitly absent — the API itself is and remains free.
+sources:
+  - https://developer.hypixel.net/
+  - https://developer.hypixel.net/policies
+  - https://api.hypixel.net/
+plans:
+  - id: hypixel-personal
+    name: Personal Key
+    type: freemium
+    description: >-
+      Default key issued to any signed-in Hypixel account via the Developer
+      Dashboard. Short expiry (default 3 days), intended for guild tracking,
+      hobby projects, and non-commercial third-party tooling.
+    entries:
+      - label: API Requests
+        name: api_requests
+        type: metered
+        metric: request
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: 'free'
+        userMultiplied: false
+      - label: Key Lifetime
+        name: key_lifetime
+        type: quota
+        metric: day
+        limit: 3
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: 'free'
+        userMultiplied: false
+    elements:
+      - name: Access to all public read endpoints
+      - name: Per-key rate limits (see rate-limits artifact)
+      - name: Short-lived key (rotation required)
+      - name: Non-commercial / personal use
+  - id: hypixel-production
+    name: Production Application
+    type: freemium
+    description: >-
+      Production-tier application granted by Hypixel for monetized or
+      large-scale third-party services. Issued by request via the Developer
+      Dashboard. No fee — Hypixel does not charge for API access. Production
+      apps unlock longer-lived keys and permission to run monetized services,
+      subject to the Hypixel Developer Policies (free-tier requirement,
+      transformative-use requirement, no price gouging).
+    entries:
+      - label: API Requests
+        name: api_requests
+        type: metered
+        metric: request
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: 'free'
+        userMultiplied: false
+      - label: Key Lifetime
+        name: key_lifetime
+        type: quota
+        metric: day
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: 'free (long-lived key)'
+        userMultiplied: false
+      - label: Monetization Permission
+        name: monetization
+        type: flat
+        metric: varies
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: 'subject to Hypixel Developer Policies (free tier + transformative use required)'
+        userMultiplied: false
+    elements:
+      - name: All Personal-tier features
+      - name: Longer-lived API key
+      - name: Permission to run monetized application
+      - name: Required free tier for end users
+      - name: Required transformative-use justification for paywalled content

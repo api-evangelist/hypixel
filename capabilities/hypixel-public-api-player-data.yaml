@@ -1,0 +1,224 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Hypixel Public API — Player Data
+  description: 'Player Data surface of the Hypixel Public API. 4 operations. Lead operation: Hypixel Data of a Specific Player,
+    Including Game Stats. Self-contained Naftiko capability covering one Hypixel business surface.'
+  tags:
+  - Hypixel
+  - Gaming
+  - Minecraft
+  - Player Data
+  created: '2026-05-30'
+  modified: '2026-05-30'
+binds:
+- namespace: env
+  keys:
+    HYPIXEL_API_KEY: HYPIXEL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: hypixel-public-api-player-data
+    baseUri: https://api.hypixel.net/v2
+    description: Hypixel Public API — Player Data business capability. Self-contained, no shared references.
+    authentication:
+      type: apikey
+      key: API-Key
+      value: '{{env.HYPIXEL_API_KEY}}'
+      placement: header
+    resources:
+    - name: v2-player
+      path: /player
+      operations:
+      - name: getPlayer
+        method: GET
+        description: Hypixel Data of a Specific Player, Including Game Stats
+        inputParameters:
+        - name: uuid
+          in: query
+          type: string
+          required: true
+          description: The uuid parameter.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-recentgames
+      path: /recentgames
+      operations:
+      - name: getRecentgames
+        method: GET
+        description: Hypixel The Recently Played Games of a Specific Player
+        inputParameters:
+        - name: uuid
+          in: query
+          type: string
+          required: true
+          description: The uuid parameter.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-status
+      path: /status
+      operations:
+      - name: getStatus
+        method: GET
+        description: Hypixel The Current Online Status of a Specific Player
+        inputParameters:
+        - name: uuid
+          in: query
+          type: string
+          required: true
+          description: The uuid parameter.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-guild
+      path: /guild
+      operations:
+      - name: getGuild
+        method: GET
+        description: Hypixel Retrieve a Guild by a Player, Id, or Name
+        inputParameters:
+        - name: id
+          in: query
+          type: string
+          required: false
+          description: The id parameter.
+        - name: player
+          in: query
+          type: string
+          required: false
+          description: The player parameter.
+        - name: name
+          in: query
+          type: string
+          required: false
+          description: The name parameter.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: hypixel-public-api-player-data-rest
+    port: 8080
+    description: REST adapter for Hypixel Public API — Player Data. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/player
+      name: v2-player
+      description: REST surface for /v2/player.
+      operations:
+      - method: GET
+        name: getPlayer
+        description: Hypixel Data of a Specific Player, Including Game Stats
+        call: hypixel-public-api-player-data.getPlayer
+        with:
+          uuid: rest.uuid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/recentgames
+      name: v2-recentgames
+      description: REST surface for /v2/recentgames.
+      operations:
+      - method: GET
+        name: getRecentgames
+        description: Hypixel The Recently Played Games of a Specific Player
+        call: hypixel-public-api-player-data.getRecentgames
+        with:
+          uuid: rest.uuid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/status
+      name: v2-status
+      description: REST surface for /v2/status.
+      operations:
+      - method: GET
+        name: getStatus
+        description: Hypixel The Current Online Status of a Specific Player
+        call: hypixel-public-api-player-data.getStatus
+        with:
+          uuid: rest.uuid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/guild
+      name: v2-guild
+      description: REST surface for /v2/guild.
+      operations:
+      - method: GET
+        name: getGuild
+        description: Hypixel Retrieve a Guild by a Player, Id, or Name
+        call: hypixel-public-api-player-data.getGuild
+        with:
+          id: rest.id
+          player: rest.player
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: hypixel-public-api-player-data-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Hypixel Public API — Player Data. One verb-noun tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: data-specific-player-including-game
+      description: Hypixel Data of a Specific Player, Including Game Stats
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hypixel-public-api-player-data.getPlayer
+      with:
+        uuid: tools.uuid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: recently-played-games-specific-player
+      description: Hypixel The Recently Played Games of a Specific Player
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hypixel-public-api-player-data.getRecentgames
+      with:
+        uuid: tools.uuid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: current-online-status-specific-player
+      description: Hypixel The Current Online Status of a Specific Player
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hypixel-public-api-player-data.getStatus
+      with:
+        uuid: tools.uuid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-guild-player-id-name
+      description: Hypixel Retrieve a Guild by a Player, Id, or Name
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: hypixel-public-api-player-data.getGuild
+      with:
+        id: tools.id
+        player: tools.player
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,420 @@
+# Hypixel Public API — Spectral Ruleset
+#
+# Opinionated ruleset enforcing the conventions observed across the Hypixel
+# Public API OpenAPI specification (api.hypixel.net/v2). Rules cover info,
+# paths, operations, parameters, responses, schemas, security, and tags.
+#
+# The Hypixel API is read-only: every documented endpoint is HTTP GET, returns
+# JSON, and is authenticated with an API key delivered via the `API-Key`
+# header (defined as the `ApiKey` security scheme).
+
+extends: [[spectral:oas, all]]
+
+rules:
+
+  # =====================================================================
+  # INFO / METADATA
+  # =====================================================================
+
+  info-title-hypixel-prefix:
+    description: "info.title MUST start with `Hypixel` so generated clients and docs are namespaced consistently."
+    message: "info.title should start with `Hypixel`"
+    given: $.info.title
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        match: "^Hypixel"
+
+  info-description-required:
+    description: "info.description is required and must be substantive enough to render the docs landing page."
+    message: "info.description must be at least 100 characters"
+    given: $.info.description
+    severity: error
+    then:
+      function: length
+      functionOptions:
+        min: 100
+
+  info-version-v2:
+    description: "Hypixel Public API is on v2; pin the version field accordingly."
+    message: "info.version should be `v2` for the public Hypixel API"
+    given: $.info.version
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^v[0-9]+$"
+
+  info-contact-required:
+    description: "info.contact is required so consumers know where to ask API-help questions."
+    given: $.info
+    severity: warn
+    then:
+      field: contact
+      function: truthy
+
+  info-terms-of-service-required:
+    description: "info.termsOfService must point at the Hypixel ToS (https://hypixel.net/tos)."
+    given: $.info
+    severity: warn
+    then:
+      field: termsOfService
+      function: truthy
+
+  # =====================================================================
+  # OPENAPI VERSION
+  # =====================================================================
+
+  openapi-version-3:
+    description: "Use OpenAPI 3.0.x for the Hypixel spec."
+    message: "openapi version must be 3.0.x"
+    given: $.openapi
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        match: "^3\\.0\\."
+
+  # =====================================================================
+  # SERVERS
+  # =====================================================================
+
+  servers-required:
+    description: "A non-empty servers array is required so SDKs know the base URL."
+    message: "At least one server entry is required"
+    given: $
+    severity: error
+    then:
+      field: servers
+      function: truthy
+
+  servers-https-only:
+    description: "Hypixel only serves the API over HTTPS — no HTTP fallback."
+    message: "server.url must be HTTPS"
+    given: $.servers[*].url
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://"
+
+  servers-hypixel-host:
+    description: "The base server should be api.hypixel.net."
+    message: "server.url should point at api.hypixel.net"
+    given: $.servers[*].url
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "api\\.hypixel\\.net"
+
+  # =====================================================================
+  # PATHS — NAMING CONVENTIONS
+  # =====================================================================
+
+  paths-versioned:
+    description: "Every path must be prefixed with the API version (`/v2/`)."
+    message: "Path must start with /v{n}/"
+    given: $.paths[*]~
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        match: "^/v[0-9]+/"
+
+  paths-lowercase:
+    description: "Path segments are lowercase across the Hypixel API."
+    message: "Path segments must be lowercase"
+    given: $.paths[*]~
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z0-9/_{}\\-]+$"
+
+  paths-no-trailing-slash:
+    description: "Paths must not end with a trailing slash."
+    message: "Path must not end with `/`"
+    given: $.paths[*]~
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "/$"
+
+  paths-no-query-strings:
+    description: "Paths must not embed query strings — use the `parameters` array."
+    message: "Path must not contain `?`"
+    given: $.paths[*]~
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "\\?"
+
+  # =====================================================================
+  # OPERATIONS
+  # =====================================================================
+
+  operation-get-only:
+    description: "Hypixel is read-only — only GET operations are permitted."
+    message: "Only `get` operations are permitted on the Hypixel API"
+    given: $.paths[*]
+    severity: error
+    then:
+      function: enumeration
+      field: "@key"
+      functionOptions:
+        values:
+          - get
+          - parameters
+          - summary
+          - description
+          - servers
+
+  operation-operationid-required:
+    description: "Every operation must declare an operationId so SDK generators have a stable handle."
+    message: "operationId is required"
+    given: $.paths[*][get,post,put,patch,delete]
+    severity: error
+    then:
+      field: operationId
+      function: truthy
+
+  operation-operationid-camelcase:
+    description: "operationId follows camelCase (e.g. `getPlayer`, `getSkyblockAuctions`)."
+    message: "operationId must be camelCase"
+    given: $.paths[*][get,post,put,patch,delete].operationId
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  operation-summary-required:
+    description: "Every operation must declare a summary."
+    message: "Operation summary is required"
+    given: $.paths[*][get,post,put,patch,delete]
+    severity: error
+    then:
+      field: summary
+      function: truthy
+
+  operation-summary-hypixel-prefix:
+    description: "Operation summaries must start with `Hypixel` for Naftiko/Microcks display consistency."
+    message: "Operation summary must start with `Hypixel`"
+    given: $.paths[*][get,post,put,patch,delete].summary
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^Hypixel "
+
+  operation-tags-required:
+    description: "Every operation must declare at least one tag for grouping."
+    message: "At least one tag is required per operation"
+    given: $.paths[*][get,post,put,patch,delete]
+    severity: error
+    then:
+      field: tags
+      function: truthy
+
+  operation-description-required:
+    description: "Every operation must declare a description (may match summary)."
+    message: "Operation description is required"
+    given: $.paths[*][get,post,put,patch,delete]
+    severity: warn
+    then:
+      field: description
+      function: truthy
+
+  # =====================================================================
+  # TAGS
+  # =====================================================================
+
+  tags-global-defined:
+    description: "Global tags must be declared at the spec level with descriptions."
+    given: $
+    severity: warn
+    then:
+      field: tags
+      function: truthy
+
+  tags-allowed:
+    description: "Operations may only use the canonical Hypixel surface tags."
+    message: "Tag must be one of: Player Data, Resources, SkyBlock, Housing, Other"
+    given: $.paths[*][get,post,put,patch,delete].tags[*]
+    severity: warn
+    then:
+      function: enumeration
+      functionOptions:
+        values:
+          - Player Data
+          - Resources
+          - SkyBlock
+          - Housing
+          - Other
+
+  # =====================================================================
+  # PARAMETERS
+  # =====================================================================
+
+  parameter-description-required:
+    description: "Every parameter must have a description."
+    message: "Parameter description is required"
+    given: $.paths[*][get,post,put,patch,delete].parameters[*]
+    severity: warn
+    then:
+      field: description
+      function: truthy
+
+  parameter-camelcase:
+    description: "Query and path parameters use camelCase or snake_case (matching upstream naming)."
+    message: "Parameter name should be camelCase or snake_case"
+    given: $.paths[*][get,post,put,patch,delete].parameters[*].name
+    severity: info
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9_]*$"
+
+  parameter-uuid-by-uuid:
+    description: "UUID-shaped player parameters should be named `uuid` for consistency with the Hypixel docs."
+    message: "Player UUID parameter should be named `uuid`"
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in == 'query' && @.schema && @.schema.format == 'uuid')].name
+    severity: info
+    then:
+      function: enumeration
+      functionOptions:
+        values: ["uuid", "player", "auctioneer", "profile", "house", "byUuid"]
+
+  # =====================================================================
+  # REQUEST BODIES
+  # =====================================================================
+
+  no-request-body:
+    description: "Hypixel is read-only; no operation should declare a requestBody."
+    message: "GET-only API — requestBody is not permitted"
+    given: $.paths[*][get,post,put,patch,delete]
+    severity: error
+    then:
+      field: requestBody
+      function: falsy
+
+  # =====================================================================
+  # RESPONSES
+  # =====================================================================
+
+  response-200-required:
+    description: "Every operation must declare a 200 success response."
+    message: "200 response is required"
+    given: $.paths[*][get,post,put,patch,delete].responses
+    severity: error
+    then:
+      field: "200"
+      function: truthy
+
+  response-content-json:
+    description: "All success responses must be application/json."
+    message: "Response must declare an application/json content type"
+    given: $.paths[*][get,post,put,patch,delete].responses[*].content
+    severity: warn
+    then:
+      field: application/json
+      function: truthy
+
+  response-description-required:
+    description: "Every response must have a description."
+    message: "Response description is required"
+    given: $.paths[*][get,post,put,patch,delete].responses[*]
+    severity: error
+    then:
+      field: description
+      function: truthy
+
+  # =====================================================================
+  # SCHEMAS — PROPERTY NAMING
+  # =====================================================================
+
+  schema-property-snake-or-camel:
+    description: "Schema properties should be snake_case or camelCase (Hypixel mixes the two — both are valid)."
+    message: "Schema property must be snake_case or camelCase"
+    given: $.components.schemas[*].properties[*]~
+    severity: info
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-zA-Z_][a-zA-Z0-9_]*$"
+
+  schema-type-required:
+    description: "Every top-level schema must declare its type."
+    message: "Schema must declare a type"
+    given: $.components.schemas[?(!@.allOf && !@.oneOf && !@.anyOf)]
+    severity: warn
+    then:
+      field: type
+      function: truthy
+
+  # =====================================================================
+  # SECURITY
+  # =====================================================================
+
+  security-scheme-apikey-defined:
+    description: "The `ApiKey` security scheme must be defined."
+    message: "components.securitySchemes.ApiKey is required"
+    given: $.components.securitySchemes
+    severity: error
+    then:
+      field: ApiKey
+      function: truthy
+
+  security-scheme-header-named-correctly:
+    description: "The API key must be sent via the `API-Key` HTTP header."
+    message: "ApiKey scheme must be apiKey/header/API-Key"
+    given: $.components.securitySchemes.ApiKey
+    severity: warn
+    then:
+      - field: type
+        function: pattern
+        functionOptions:
+          match: "^apiKey$"
+      - field: in
+        function: pattern
+        functionOptions:
+          match: "^header$"
+      - field: name
+        function: pattern
+        functionOptions:
+          match: "^API-Key$"
+
+  global-security-defined:
+    description: "Global security must reference the ApiKey scheme."
+    message: "Global security must reference ApiKey"
+    given: $
+    severity: warn
+    then:
+      field: security
+      function: truthy
+
+  # =====================================================================
+  # GENERAL QUALITY
+  # =====================================================================
+
+  examples-encouraged:
+    description: "Operations should declare at least one named example for Microcks mocking."
+    message: "Operation should declare named examples on its 200 response"
+    given: $.paths[*][get,post,put,patch,delete].responses.200.content.application/json
+    severity: info
+    then:
+      field: examples
+      function: truthy
+
+  microcks-extension-encouraged:
+    description: "Operations should declare x-microcks-operation so they mock cleanly under Microcks FALLBACK dispatcher."
+    message: "Operation should declare x-microcks-operation"
+    given: $.paths[*][get,post,put,patch,delete]
+    severity: info
+    then:
+      field: x-microcks-operation
+      function: truthy

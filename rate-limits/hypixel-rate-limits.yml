@@ -1,0 +1,93 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Hypixel
+providerId: hypixel
+created: '2026-05-30'
+modified: '2026-05-30'
+reconciled: false
+tags:
+  - Rate Limiting
+  - Gaming
+  - Minecraft
+  - Public API
+description: >-
+  Hypixel enforces per-API-key request limits across a rolling 5-minute window
+  (with per-minute caps surfaced through the response headers). The exact
+  numeric cap depends on the application class: a default "Personal" key is
+  capped at 120 requests per 5 minutes (≈ 24 requests/minute / ~2 requests
+  every 5 seconds in burst), while approved "Production" applications receive
+  higher caps negotiated case-by-case via the Developer Dashboard. The
+  Developer Policies additionally call out endpoint-specific behavior — e.g.
+  rate limits on requesting the same player's data repeatedly within short
+  windows. Hypixel also expects clients to implement caching and to back off on
+  429 responses.
+sources:
+  - https://api.hypixel.net/
+  - https://developer.hypixel.net/
+  - https://developer.hypixel.net/policies
+headers:
+  rateLimit: RateLimit-Limit
+  rateLimitRemaining: RateLimit-Remaining
+  rateLimitReset: RateLimit-Reset
+  retryAfter: Retry-After
+responseCodes:
+  throttled: 429
+  quotaExceeded: 429
+limits:
+  - name: Default Personal Key — Per-5-Minute Window
+    scope: key
+    metric: requests_per_window
+    limit: 120
+    timeFrame: 5_minutes
+    notes: >-
+      Default cap for Personal-tier keys. Surfaced via RateLimit-Limit /
+      RateLimit-Remaining / RateLimit-Reset response headers. Concretely
+      ≈ 24 req/min sustained.
+  - name: Default Personal Key — Per-Minute (Derived)
+    scope: key
+    metric: requests_per_minute
+    limit: 24
+    timeFrame: minute
+    notes: >-
+      Per-minute equivalent of the 120-per-5-minutes window. Hypixel surfaces
+      per-minute remaining via RateLimit-Remaining.
+  - name: Production Application Key
+    scope: key
+    metric: varies
+    limit: 'higher tier; case-by-case via Developer Dashboard application'
+    notes: >-
+      Production-tier applications negotiate higher per-key throughput via
+      the Developer Dashboard. There is no published self-serve number.
+  - name: Same-Player Endpoint Throttling
+    scope: key/resource
+    metric: requests_per_resource
+    limit: 'reasonable intervals; e.g. once-per-hour for guild tracking'
+    notes: >-
+      Per Hypixel Developer Policies, the API additionally throttles
+      back-to-back identical requests (e.g. polling the same player) and
+      expects consumers to cache.
+policies:
+  - name: Honor RateLimit headers
+    description: >-
+      Read RateLimit-Limit, RateLimit-Remaining, and RateLimit-Reset on every
+      response and stop issuing further requests for the current window when
+      RateLimit-Remaining reaches 0.
+  - name: Back off on 429
+    description: >-
+      On HTTP 429 the client must back off and respect the Retry-After header
+      before retrying.
+  - name: Cache aggressively
+    description: >-
+      Hypixel explicitly recommends client-side caching to reduce request
+      volume — especially for static reference resources (/resources/*) which
+      change infrequently.
+  - name: One key per application
+    description: >-
+      Do not share API keys across applications or with third parties. Keys
+      issued under the Developer Dashboard are tied to a single application.
+  - name: Idle-key expiry
+    description: >-
+      Applications that issue zero requests in 14 days, or that go inactive
+      across any 28-day window, may have their key/application disabled or
+      deleted.
