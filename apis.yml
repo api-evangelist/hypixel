@@ -1,13 +1,11 @@
 aid: hypixel
 name: Hypixel
 description: >-
-  Hypixel Public API — the official REST API of the Hypixel Minecraft server network,
-  the largest Minecraft minigame server. The API exposes player profiles and stats,
-  guilds, friends, recent games, online status, server-wide counts, network boosters,
-  punishment statistics, leaderboards, housing, and the full SkyBlock economy
-  (auctions, bazaar, profiles, museum, garden, bingo, fire sales). All endpoints are
-  read-only HTTP GET requests returning JSON, authenticated with a per-application
-  API key issued via the Hypixel Developer Dashboard.
+  Hypixel Public API — the official REST API of the Hypixel Minecraft server network, the largest Minecraft minigame
+  server. The API exposes player profiles and stats, guilds, friends, recent games, online status, server-wide counts,
+  network boosters, punishment statistics, leaderboards, housing, and the full SkyBlock economy (auctions, bazaar,
+  profiles, museum, garden, bingo, fire sales). All endpoints are read-only HTTP GET requests returning JSON,
+  authenticated with a per-application API key issued via the Hypixel Developer Dashboard.
 url: https://api.hypixel.net/
 specificationVersion: '0.20'
 created: '2026-05-28'
@@ -28,11 +26,10 @@ tags:
 apis:
   - name: Hypixel Public API
     description: >-
-      Read-only REST API exposing player, guild, recent games, online status, server
-      counts, boosters, leaderboards, punishment statistics, housing, and the full
-      SkyBlock economy (auctions, bazaar, profiles, museum, garden, bingo, fire
-      sales) for the Hypixel Minecraft network. All endpoints are HTTP GET, JSON,
-      and authenticated with an API key issued via the Hypixel Developer Dashboard.
+      Read-only REST API exposing player, guild, recent games, online status, server counts, boosters, leaderboards,
+      punishment statistics, housing, and the full SkyBlock economy (auctions, bazaar, profiles, museum, garden, bingo,
+      fire sales) for the Hypixel Minecraft network. All endpoints are HTTP GET, JSON, and authenticated with an API key
+      issued via the Hypixel Developer Dashboard.
     humanURL: https://api.hypixel.net/
     baseURL: https://api.hypixel.net/v2
     version: v2
@@ -57,16 +54,6 @@ apis:
       - type: CodeExamples
         title: Java Examples
         url: https://github.com/HypixelDev/PublicAPI/tree/master/hypixel-api-example
-      - type: NaftikoCapability
-        url: capabilities/hypixel-public-api-player-data.yaml
-      - type: NaftikoCapability
-        url: capabilities/hypixel-public-api-resources.yaml
-      - type: NaftikoCapability
-        url: capabilities/hypixel-public-api-skyblock.yaml
-      - type: NaftikoCapability
-        url: capabilities/hypixel-public-api-housing.yaml
-      - type: NaftikoCapability
-        url: capabilities/hypixel-public-api-other.yaml
 common:
   - type: Website
     url: https://hypixel.net/
@@ -99,84 +86,73 @@ common:
 features:
   - name: Player Data
     description: >-
-      Retrieve a player's full profile and per-game statistics by Minecraft UUID,
-      including their recent games and current online status.
+      Retrieve a player's full profile and per-game statistics by Minecraft UUID, including their recent games and
+      current online status.
   - name: Guild Lookup
     description: >-
-      Resolve a Hypixel guild by guild id, player UUID, or guild name and return
-      its members, ranks, level, and per-game experience.
+      Resolve a Hypixel guild by guild id, player UUID, or guild name and return its members, ranks, level, and per-game
+      experience.
   - name: Network Boosters
-    description: >-
-      Read the list of active in-network coin/XP boosters and the queue waiting
-      to activate per game.
+    description: Read the list of active in-network coin/XP boosters and the queue waiting to activate per game.
   - name: Server Counts and Leaderboards
     description: >-
-      Get real-time player counts per game and lobby plus the official network
-      leaderboards across every supported Hypixel game.
+      Get real-time player counts per game and lobby plus the official network leaderboards across every supported
+      Hypixel game.
   - name: Punishment Statistics
-    description: >-
-      Read network-wide moderation statistics including watchdog/staff bans
-      today and historical totals.
+    description: Read network-wide moderation statistics including watchdog/staff bans today and historical totals.
   - name: SkyBlock Economy
     description: >-
-      Full access to the SkyBlock economy — active auctions (paged), recently
-      ended auctions, the live bazaar, fire sales, plus per-profile data
-      (profile, profiles, museum, garden, bingo).
+      Full access to the SkyBlock economy — active auctions (paged), recently ended auctions, the live bazaar, fire
+      sales, plus per-profile data (profile, profiles, museum, garden, bingo).
   - name: SkyBlock Resources
     description: >-
-      Static SkyBlock resource catalogs — collections, skills, items, current
-      election and mayor, and the current bingo event.
+      Static SkyBlock resource catalogs — collections, skills, items, current election and mayor, and the current bingo
+      event.
   - name: Game Resources
     description: >-
-      Static reference data for the network — game types, achievements,
-      challenges, quests, guild achievements, and vanity pets / companions.
+      Static reference data for the network — game types, achievements, challenges, quests, guild achievements, and
+      vanity pets / companions.
   - name: Housing
     description: >-
-      Active public houses across the network, the public houses owned by a
-      given player, and the full data of a single house.
+      Active public houses across the network, the public houses owned by a given player, and the full data of a single
+      house.
 useCases:
   - name: Public Stats Sites
     description: >-
-      Build a third-party stats website (e.g. plancke.io style) that resolves
-      a Minecraft username to UUID and renders the player's full Hypixel
-      profile, recent games, guild, and per-game stats.
+      Build a third-party stats website (e.g. plancke.io style) that resolves a Minecraft username to UUID and renders
+      the player's full Hypixel profile, recent games, guild, and per-game stats.
   - name: SkyBlock Flipping and Arbitrage Tools
     description: >-
-      Subscribe to active SkyBlock auctions and bazaar order books to power
-      flipping calculators, arbitrage scanners, and craft-cost analyzers.
+      Subscribe to active SkyBlock auctions and bazaar order books to power flipping calculators, arbitrage scanners,
+      and craft-cost analyzers.
   - name: Guild Dashboards and Bots
     description: >-
-      Power Discord bots and guild dashboards that resolve guild membership,
-      track per-game contribution, and rank guild members on the network
-      leaderboards.
+      Power Discord bots and guild dashboards that resolve guild membership, track per-game contribution, and rank guild
+      members on the network leaderboards.
   - name: Network Status Widgets
-    description: >-
-      Build status widgets and lobby-finder tools using the live /counts and
-      /status endpoints.
+    description: Build status widgets and lobby-finder tools using the live /counts and /status endpoints.
   - name: Watchdog and Moderation Reporting
     description: >-
-      Surface daily and historical watchdog/staff ban counts from
-      /punishmentstats for community moderation transparency reports.
+      Surface daily and historical watchdog/staff ban counts from /punishmentstats for community moderation transparency
+      reports.
 integrations:
   - name: Minecraft / Mojang UUID Resolution
     description: >-
-      Players are addressed by Minecraft UUID; consumers typically resolve
-      usernames via the Mojang API first, then query Hypixel by UUID.
+      Players are addressed by Minecraft UUID; consumers typically resolve usernames via the Mojang API first, then
+      query Hypixel by UUID.
   - name: Hypixel ModAPI (Forge / Fabric)
     description: >-
-      The Hypixel ModAPI lets Minecraft mods request a subset of Hypixel data
-      via the Minecraft plugin-message system in-game, complementing this REST
-      API.
+      The Hypixel ModAPI lets Minecraft mods request a subset of Hypixel data via the Minecraft plugin-message system
+      in-game, complementing this REST API.
 solutions:
   - name: SkyBlock Tooling Ecosystem
     description: >-
-      The Hypixel API underpins a large ecosystem of community SkyBlock tools —
-      auction flippers, museum / collection trackers, bazaar arbitrage bots,
-      and profile viewers.
+      The Hypixel API underpins a large ecosystem of community SkyBlock tools — auction flippers, museum / collection
+      trackers, bazaar arbitrage bots, and profile viewers.
   - name: Network Telemetry
     description: >-
-      Counts, leaderboards, boosters, and punishment statistics together form
-      a public telemetry surface for the entire Hypixel network.
+      Counts, leaderboards, boosters, and punishment statistics together form a public telemetry surface for the entire
+      Hypixel network.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

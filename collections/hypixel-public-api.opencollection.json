@@ -1,0 +1,668 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Hypixel Public API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "API-Key",
+      "value": "{{API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Player Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Hypixel Data of a Specific Player, Including Game Stats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/player",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "ad8fefaa8351454bb739a4eaa872173f",
+                "type": "query",
+                "description": "The uuid parameter."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Data of a specific player, including game stats"
+        },
+        {
+          "info": {
+            "name": "Hypixel The Recently Played Games of a Specific Player",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/recentgames",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "ad8fefaa8351454bb739a4eaa872173f",
+                "type": "query",
+                "description": "The uuid parameter."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "The recently played games of a specific player"
+        },
+        {
+          "info": {
+            "name": "Hypixel The Current Online Status of a Specific Player",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/status",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "ad8fefaa8351454bb739a4eaa872173f",
+                "type": "query",
+                "description": "The uuid parameter."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "The current online status of a specific player"
+        },
+        {
+          "info": {
+            "name": "Hypixel Retrieve a Guild by a Player, Id, or Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/guild",
+            "params": [
+              {
+                "name": "id",
+                "value": "5fcbf9d9d295e80a766f3b14",
+                "type": "query",
+                "description": "The id parameter."
+              },
+              {
+                "name": "player",
+                "value": "ad8fefaa8351454bb739a4eaa872173f",
+                "type": "query",
+                "description": "The player parameter."
+              },
+              {
+                "name": "name",
+                "value": "ExamplePlayer",
+                "type": "query",
+                "description": "The name parameter."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a Guild by a player, id, or name"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Resources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Hypixel Game Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/resources/games"
+          },
+          "docs": "Returns information about Hypixel Games. This endpoint is in early development and we are working to add more information when possible <a href=\"https://github.com/HypixelDev/PublicAPI/discussions/197#discussioncomment-1047648\">HypixelDev/PublicAPI#197</a>"
+        },
+        {
+          "info": {
+            "name": "Hypixel Achievements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/resources/achievements"
+          },
+          "docs": "Achievements"
+        },
+        {
+          "info": {
+            "name": "Hypixel Challenges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/resources/challenges"
+          },
+          "docs": "Challenges"
+        },
+        {
+          "info": {
+            "name": "Hypixel Quests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/resources/quests"
+          },
+          "docs": "Quests"
+        },
+        {
+          "info": {
+            "name": "Hypixel Guild Achievements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/resources/guilds/achievements"
+          },
+          "docs": "Guild Achievements"
+        },
+        {
+          "info": {
+            "name": "Hypixel Vanity Pets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/resources/vanity/pets"
+          },
+          "docs": "Vanity Pets"
+        },
+        {
+          "info": {
+            "name": "Hypixel Vanity Companions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/resources/vanity/companions"
+          },
+          "docs": "Vanity Companions"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SkyBlock",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Hypixel Collections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/resources/skyblock/collections"
+          },
+          "docs": "Information regarding Collections in the SkyBlock game."
+        },
+        {
+          "info": {
+            "name": "Hypixel Skills",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/resources/skyblock/skills"
+          },
+          "docs": "Information regarding skills in the SkyBlock game."
+        },
+        {
+          "info": {
+            "name": "Hypixel Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/resources/skyblock/items"
+          },
+          "docs": "Information regarding items in the SkyBlock game."
+        },
+        {
+          "info": {
+            "name": "Hypixel Election and Mayor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/resources/skyblock/election"
+          },
+          "docs": "Information regarding the current mayor and ongoing election in SkyBlock."
+        },
+        {
+          "info": {
+            "name": "Hypixel Current Bingo Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/resources/skyblock/bingo"
+          },
+          "docs": "Information regarding the current bingo event and its goals."
+        },
+        {
+          "info": {
+            "name": "Hypixel News",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/skyblock/news",
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "News"
+        },
+        {
+          "info": {
+            "name": "Hypixel Request Auction(s) by the Auction UUID, Player UUID, or Profile UUID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/skyblock/auction",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "ad8fefaa8351454bb739a4eaa872173f",
+                "type": "query",
+                "description": "The auction UUID that you wish to request"
+              },
+              {
+                "name": "player",
+                "value": "example",
+                "type": "query",
+                "description": "The player UUID that you wish to request"
+              },
+              {
+                "name": "profile",
+                "value": "a1b2c3d4-1234-5678-9abc-def012345678",
+                "type": "query",
+                "description": "The profile UUID that you wish to request"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns the auctions selected by the provided query. Only one query parameter can be used in a single request, and cannot be filtered by multiple."
+        },
+        {
+          "info": {
+            "name": "Hypixel Active Auctions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/skyblock/auctions",
+            "params": [
+              {
+                "name": "page",
+                "value": "0",
+                "type": "query",
+                "description": "The page parameter."
+              }
+            ]
+          },
+          "docs": "Returns the currently active auctions sorted by last updated first and paginated."
+        },
+        {
+          "info": {
+            "name": "Hypixel Recently Ended Auctions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/skyblock/auctions_ended"
+          },
+          "docs": "SkyBlock auctions which ended in the last 60 seconds."
+        },
+        {
+          "info": {
+            "name": "Hypixel Bazaar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/skyblock/bazaar"
+          },
+          "docs": "Returns the list of products along with their sell summary, buy summary and quick status.\n ### Product Description\n The returned product info has 3 main fields:\n - `buy_summary`\n - `sell_summary`\n - `quick_status`\n\n`buy_summary` and `sell_summary` are the current top 30 orders for each transaction type (in-game example: [Stock of Stonks](https://i.imgur.com/SjRONxq.png)).\n\n`quick_status` is a computed summary of the live state of the product (used for advanced mode view in the bazaar):\n- `sellVo"
+        },
+        {
+          "info": {
+            "name": "Hypixel Profile by UUID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/skyblock/profile",
+            "params": [
+              {
+                "name": "profile",
+                "value": "ad8fefaa8351454bb739a4eaa872173f",
+                "type": "query",
+                "description": "The profile parameter."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "SkyBlock profile data, such as stats, objectives etc. The data returned can differ depending on the players in-game API settings."
+        },
+        {
+          "info": {
+            "name": "Hypixel Profiles by Player",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/skyblock/profiles",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "ad8fefaa8351454bb739a4eaa872173f",
+                "type": "query",
+                "description": "The uuid parameter."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Profiles by player"
+        },
+        {
+          "info": {
+            "name": "Hypixel Museum Data by Profile ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/skyblock/museum",
+            "params": [
+              {
+                "name": "profile",
+                "value": "ad8fefaa8351454bb739a4eaa872173f",
+                "type": "query",
+                "description": "The profile parameter."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "SkyBlock museum data for all members of the provided profile. The data returned can differ depending on the players in-game API settings."
+        },
+        {
+          "info": {
+            "name": "Hypixel Garden Data by Profile ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/skyblock/garden",
+            "params": [
+              {
+                "name": "profile",
+                "value": "ad8fefaa8351454bb739a4eaa872173f",
+                "type": "query",
+                "description": "The profile parameter."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "SkyBlock garden data for the provided profile."
+        },
+        {
+          "info": {
+            "name": "Hypixel Bingo Data by Player",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/skyblock/bingo",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "ad8fefaa8351454bb739a4eaa872173f",
+                "type": "query",
+                "description": "The uuid parameter."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Bingo data for participated events of the provided player."
+        },
+        {
+          "info": {
+            "name": "Hypixel Active/Upcoming Fire Sales",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/skyblock/firesales"
+          },
+          "docs": "Retrieve the currently active or upcoming Fire Sales for SkyBlock."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Housing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Hypixel The Currently Active Public Houses.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/housing/active",
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This data may be cached for a short period of time."
+        },
+        {
+          "info": {
+            "name": "Hypixel Information About a Specific House.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/housing/house",
+            "params": [
+              {
+                "name": "house",
+                "value": "example",
+                "type": "query",
+                "description": "The UUID of the house to get information about."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This data may be cached for a short period of time."
+        },
+        {
+          "info": {
+            "name": "Hypixel The Public Houses for a Specific Player.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/housing/houses",
+            "params": [
+              {
+                "name": "player",
+                "value": "example",
+                "type": "query",
+                "description": "The UUID of the player to get houses for."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This data may be cached for a short period of time."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Other",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Hypixel Active Network Boosters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/boosters",
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Active Network Boosters"
+        },
+        {
+          "info": {
+            "name": "Hypixel Current Player Counts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/counts",
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Current Player Counts"
+        },
+        {
+          "info": {
+            "name": "Hypixel Current Leaderboards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/leaderboards",
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Current Leaderboards"
+        },
+        {
+          "info": {
+            "name": "Hypixel Punishment Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/punishmentstats",
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Punishment Statistics"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
