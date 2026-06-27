@@ -48,7 +48,7 @@ apis:
         url: https://developer.hypixel.net/policies
       - type: OpenAPI
         url: openapi/hypixel-public-api-openapi.yml
-      - type: SDK
+      - type: SDKs
         title: Java SDK
         url: https://github.com/HypixelDev/PublicAPI
       - type: CodeExamples
@@ -81,7 +81,7 @@ common:
     url: rules/hypixel-spectral-rules.yml
   - type: Vocabulary
     url: vocabulary/hypixel-vocabulary.yml
-  - type: JsonLd
+  - type: JSONLD
     url: json-ld/hypixel-public-api-context.jsonld
 features:
   - name: Player Data
