@@ -1,0 +1,19 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/hypixel-public-api-openapi.json, openapi/hypixel-public-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: ApiKey
+  type: apiKey
+  in: header
+  parameter: API-Key
+  description: Obtained via the [Hypixel Developer Dashboard](https://developer.hypixel.net)
+    when creating an application. You can also request higher limits for production applications
+    in this dashboard.
+  sources:
+  - openapi/hypixel-public-api-openapi.json
+  - openapi/hypixel-public-api-openapi.yml

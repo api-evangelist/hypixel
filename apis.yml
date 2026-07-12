@@ -55,6 +55,12 @@ apis:
         title: Java Examples
         url: https://github.com/HypixelDev/PublicAPI/tree/master/hypixel-api-example
 common:
+  - type: VulnerabilityDisclosure
+    url: security/hypixel-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/hypixel-domain-security.yml
+  - type: Authentication
+    url: authentication/hypixel-authentication.yml
   - type: Website
     url: https://hypixel.net/
   - type: DeveloperPortal
