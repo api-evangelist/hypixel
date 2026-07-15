@@ -55,6 +55,8 @@ apis:
         title: Java Examples
         url: https://github.com/HypixelDev/PublicAPI/tree/master/hypixel-api-example
 common:
+  - type: AgenticAccess
+    url: agentic-access/hypixel-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/hypixel-vulnerability-disclosure.yml
   - type: DomainSecurity
