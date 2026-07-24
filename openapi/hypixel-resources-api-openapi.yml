@@ -1,0 +1,310 @@
+openapi: 3.0.3
+info:
+  title: Hypixel Public Housing Resources API
+  x-logo:
+    url: https://api.hypixel.net/assets/images/logo.png
+    altText: Hypixel Logo
+    href: '#'
+  description: "# Introduction\nThis is the official Hypixel API documentation. [Hypixel Website](https://hypixel.net/) - [GitHub Repo](https://github.com/HypixelDev/PublicAPI) - [API Help Forum](https://hypixel.net/forums/api-help.111/)\n\nAll use of the API must conform to the [API policies](https://developer.hypixel.net/policies), violation of these policies may lead to applications being revoked or users banned from the API.\n## Limits\nAPI keys are limited to a maximum amount of requests per 5 minute intervals. These limits will depend on the type of application that the key is assigned to.\n\nEndpoints which require the use of an API key will also respond with headers to assist with managing the rate limit:\n- 'RateLimit-Limit' - The limit of requests per minute for the provided API key.\n- 'RateLimit-Remaining' - The remaining amount of requests allowed for the current minute.\n- 'RateLimit-Reset' - The amount of seconds until the next minute and the reset of the API key usages.\n\n## GameTypes\n| ID | Type Name      | Database Name | Clean Name           |\n |----|----------------|---------------|----------------------|\n | 2  | QUAKECRAFT     | Quake         | Quake                |\n | 3  | WALLS          | Walls         | Walls                |\n | 4  | PAINTBALL      | Paintball     | Paintball            |\n | 5  | SURVIVAL_GAMES | HungerGames   | Blitz Survival Games |\n | 6  | TNTGAMES       | TNTGames      | TNT Games            |\n | 7  | VAMPIREZ       | VampireZ      | VampireZ             |\n | 13 | WALLS3         | Walls3        | Mega Walls           |\n | 14 | ARCADE         | Arcade        | Arcade               |\n | 17 | ARENA          | Arena         | Arena                |\n | 20 | UHC            | UHC           | UHC Champions        |\n | 21 | MCGO           | MCGO          | Cops and Crims       |\n | 23 | BATTLEGROUND   | Battleground  | Warlords             |\n | 24 | SUPER_SMASH    | SuperSmash    | Smash Heroes         |\n | 25 | GINGERBREAD    | GingerBread   | Turbo Kart Racers    |\n | 26 | HOUSING        | Housing       | Housing              |\n | 51 | SKYWARS        | SkyWars       | SkyWars              |\n | 52 | TRUE_COMBAT    | TrueCombat    | Crazy Walls          |\n | 54 | SPEED_UHC      | SpeedUHC      | Speed UHC            |\n | 55 | SKYCLASH       | SkyClash      | SkyClash             |\n | 56 | LEGACY         | Legacy        | Classic Games        |\n | 57 | PROTOTYPE      | Prototype     | Prototype            |\n | 58 | BEDWARS        | Bedwars       | Bed Wars             |\n | 59 | MURDER_MYSTERY | MurderMystery | Murder Mystery       |\n | 60 | BUILD_BATTLE   | BuildBattle   | Build Battle         |\n | 61 | DUELS          | Duels         | Duels                |\n | 63 | SKYBLOCK       | SkyBlock      | SkyBlock             |\n | 64 | PIT            | Pit           | Pit                  |\n | 65 | REPLAY         | Replay        | Replay               |\n | 67 | SMP            | SMP           | SMP                  |\n | 68 | WOOL_GAMES     | WoolGames     | Wool Wars            |\n\n### Storage\nGames store their respective stats and data in a Player's `stats` collection. The game's specific data is held within a JSON object named after it's `Database Name` (seen above.)\n### GameType Notes\n* Clean names are what is displayed to the user when referencing the name.\n* Database names or IDs are used when the API references a specific GameType.\n## Notes\n\n### Date and Time\nGenerally dates are stored as a Unix Epoch times in milliseconds.\n### Response Format\nResponses are served in JSON format.\n### UUID Parameters\nAll uuid parameters support both dashed and undashed versions.\n### SkyBlock items and inventories\nItems and inventory data are stored as a base64 encoded string containing gzipped nbt data.\nIf a method is missing important information about an item or inventory, you should try checking this!\n>Note: the base64 string may contain a unicode escape for non-alphabetical symbols, and some programming languages may have silent defects when interpreting the string. \n\n# Authentication\n\n<!-- ReDoc-Inject: <security-definitions> -->"
+  version: v2
+  termsOfService: https://hypixel.net/tos
+  contact:
+    name: Hypixel Support
+    url: https://developer.hypixel.net
+  x-jentic-source-url: https://api.hypixel.net/
+  x-generated-from: jentic-public-apis
+  x-last-validated: '2026-05-30'
+servers:
+- url: https://api.hypixel.net
+security:
+- ApiKey: []
+tags:
+- name: Resources
+  description: Static reference data — games, achievements, challenges, quests, guild achievements, vanity pets and companions.
+paths:
+  /v2/resources/games:
+    get:
+      summary: Hypixel Game Information
+      description: Returns information about Hypixel Games. This endpoint is in early development and we are working to add more information when possible <a href="https://github.com/HypixelDev/PublicAPI/discussions/197#discussioncomment-1047648">HypixelDev/PublicAPI#197</a>
+      tags:
+      - Resources
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  lastUpdated:
+                    type: number
+                  games:
+                    type: object
+                    description: A map where the key is the backend name of the game
+                    additionalProperties:
+                      $ref: '#/components/schemas/Game'
+              examples:
+                GetResourcesGames200Example:
+                  summary: Default getResourcesGames 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    lastUpdated: 1.0
+                    games: {}
+      operationId: getResourcesGames
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v2/resources/achievements:
+    get:
+      summary: Hypixel Achievements
+      tags:
+      - Resources
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  lastUpdated:
+                    type: number
+                  achievements:
+                    type: object
+              examples:
+                GetResourcesAchievements200Example:
+                  summary: Default getResourcesAchievements 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    lastUpdated: 1.0
+                    achievements: {}
+      operationId: getResourcesAchievements
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      description: Achievements
+  /v2/resources/challenges:
+    get:
+      summary: Hypixel Challenges
+      tags:
+      - Resources
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  lastUpdated:
+                    type: number
+                  challenges:
+                    type: object
+              examples:
+                GetResourcesChallenges200Example:
+                  summary: Default getResourcesChallenges 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    lastUpdated: 1.0
+                    challenges: {}
+      operationId: getResourcesChallenges
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      description: Challenges
+  /v2/resources/quests:
+    get:
+      summary: Hypixel Quests
+      tags:
+      - Resources
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  lastUpdated:
+                    type: number
+                  quests:
+                    type: object
+              examples:
+                GetResourcesQuests200Example:
+                  summary: Default getResourcesQuests 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    lastUpdated: 1.0
+                    quests: {}
+      operationId: getResourcesQuests
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      description: Quests
+  /v2/resources/guilds/achievements:
+    get:
+      summary: Hypixel Guild Achievements
+      tags:
+      - Resources
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  lastUpdated:
+                    type: number
+                  one_time:
+                    type: object
+                  tiered:
+                    type: object
+              examples:
+                GetResourcesGuildsAchievements200Example:
+                  summary: Default getResourcesGuildsAchievements 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    lastUpdated: 1.0
+                    one_time: {}
+                    tiered: {}
+      operationId: getResourcesGuildsAchievements
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      description: Guild Achievements
+  /v2/resources/vanity/pets:
+    get:
+      summary: Hypixel Vanity Pets
+      tags:
+      - Resources
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  lastUpdated:
+                    type: number
+                  types:
+                    type: object
+                  rarities:
+                    type: object
+              examples:
+                GetResourcesVanityPets200Example:
+                  summary: Default getResourcesVanityPets 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    lastUpdated: 1.0
+                    types: {}
+                    rarities: {}
+      operationId: getResourcesVanityPets
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      description: Vanity Pets
+  /v2/resources/vanity/companions:
+    get:
+      summary: Hypixel Vanity Companions
+      tags:
+      - Resources
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  lastUpdated:
+                    type: number
+                  types:
+                    type: object
+                  rarities:
+                    type: object
+              examples:
+                GetResourcesVanityCompanions200Example:
+                  summary: Default getResourcesVanityCompanions 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    lastUpdated: 1.0
+                    types: {}
+                    rarities: {}
+      operationId: getResourcesVanityCompanions
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      description: Vanity Companions
+components:
+  schemas:
+    Game:
+      description: Information about a specific game. When a field is not present you should fallback to the provided default if there is one, required fields will always exist.
+      required:
+      - id
+      - name
+      - databaseName
+      properties:
+        id:
+          type: integer
+          description: The backend ID of the game.
+          example: 1
+        name:
+          type: string
+          description: The display name of the game.
+          example: Bed Wars
+        databaseName:
+          type: string
+          description: The key used for database storage, such as for stats.
+          example: Bedwars
+        modeNames:
+          type: object
+          description: A map of mode key to display name
+          example:
+            solo_normal: Solo
+            team_normal: Doubles
+        retired:
+          type: boolean
+          description: True if the game is retired and no longer playable.
+          default: false
+          example: false
+        legacy:
+          type: boolean
+          description: True if the game is legacy and part of the Classic Lobby.
+          default: false
+          example: false
+      example:
+        id: 58
+        name: Bed Wars
+        databaseName: Bedwars
+        modeNames:
+          BEDWARS_TWO_FOUR: 4v4
+          BEDWARS_EIGHT_ONE: Solo
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: header
+      name: API-Key
+      description: Obtained via the [Hypixel Developer Dashboard](https://developer.hypixel.net) when creating an application. You can also request higher limits for production applications in this dashboard.

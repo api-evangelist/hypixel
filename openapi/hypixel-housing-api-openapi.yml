@@ -1,0 +1,229 @@
+openapi: 3.0.3
+info:
+  title: Hypixel Public Housing API
+  x-logo:
+    url: https://api.hypixel.net/assets/images/logo.png
+    altText: Hypixel Logo
+    href: '#'
+  description: "# Introduction\nThis is the official Hypixel API documentation. [Hypixel Website](https://hypixel.net/) - [GitHub Repo](https://github.com/HypixelDev/PublicAPI) - [API Help Forum](https://hypixel.net/forums/api-help.111/)\n\nAll use of the API must conform to the [API policies](https://developer.hypixel.net/policies), violation of these policies may lead to applications being revoked or users banned from the API.\n## Limits\nAPI keys are limited to a maximum amount of requests per 5 minute intervals. These limits will depend on the type of application that the key is assigned to.\n\nEndpoints which require the use of an API key will also respond with headers to assist with managing the rate limit:\n- 'RateLimit-Limit' - The limit of requests per minute for the provided API key.\n- 'RateLimit-Remaining' - The remaining amount of requests allowed for the current minute.\n- 'RateLimit-Reset' - The amount of seconds until the next minute and the reset of the API key usages.\n\n## GameTypes\n| ID | Type Name      | Database Name | Clean Name           |\n |----|----------------|---------------|----------------------|\n | 2  | QUAKECRAFT     | Quake         | Quake                |\n | 3  | WALLS          | Walls         | Walls                |\n | 4  | PAINTBALL      | Paintball     | Paintball            |\n | 5  | SURVIVAL_GAMES | HungerGames   | Blitz Survival Games |\n | 6  | TNTGAMES       | TNTGames      | TNT Games            |\n | 7  | VAMPIREZ       | VampireZ      | VampireZ             |\n | 13 | WALLS3         | Walls3        | Mega Walls           |\n | 14 | ARCADE         | Arcade        | Arcade               |\n | 17 | ARENA          | Arena         | Arena                |\n | 20 | UHC            | UHC           | UHC Champions        |\n | 21 | MCGO           | MCGO          | Cops and Crims       |\n | 23 | BATTLEGROUND   | Battleground  | Warlords             |\n | 24 | SUPER_SMASH    | SuperSmash    | Smash Heroes         |\n | 25 | GINGERBREAD    | GingerBread   | Turbo Kart Racers    |\n | 26 | HOUSING        | Housing       | Housing              |\n | 51 | SKYWARS        | SkyWars       | SkyWars              |\n | 52 | TRUE_COMBAT    | TrueCombat    | Crazy Walls          |\n | 54 | SPEED_UHC      | SpeedUHC      | Speed UHC            |\n | 55 | SKYCLASH       | SkyClash      | SkyClash             |\n | 56 | LEGACY         | Legacy        | Classic Games        |\n | 57 | PROTOTYPE      | Prototype     | Prototype            |\n | 58 | BEDWARS        | Bedwars       | Bed Wars             |\n | 59 | MURDER_MYSTERY | MurderMystery | Murder Mystery       |\n | 60 | BUILD_BATTLE   | BuildBattle   | Build Battle         |\n | 61 | DUELS          | Duels         | Duels                |\n | 63 | SKYBLOCK       | SkyBlock      | SkyBlock             |\n | 64 | PIT            | Pit           | Pit                  |\n | 65 | REPLAY         | Replay        | Replay               |\n | 67 | SMP            | SMP           | SMP                  |\n | 68 | WOOL_GAMES     | WoolGames     | Wool Wars            |\n\n### Storage\nGames store their respective stats and data in a Player's `stats` collection. The game's specific data is held within a JSON object named after it's `Database Name` (seen above.)\n### GameType Notes\n* Clean names are what is displayed to the user when referencing the name.\n* Database names or IDs are used when the API references a specific GameType.\n## Notes\n\n### Date and Time\nGenerally dates are stored as a Unix Epoch times in milliseconds.\n### Response Format\nResponses are served in JSON format.\n### UUID Parameters\nAll uuid parameters support both dashed and undashed versions.\n### SkyBlock items and inventories\nItems and inventory data are stored as a base64 encoded string containing gzipped nbt data.\nIf a method is missing important information about an item or inventory, you should try checking this!\n>Note: the base64 string may contain a unicode escape for non-alphabetical symbols, and some programming languages may have silent defects when interpreting the string. \n\n# Authentication\n\n<!-- ReDoc-Inject: <security-definitions> -->"
+  version: v2
+  termsOfService: https://hypixel.net/tos
+  contact:
+    name: Hypixel Support
+    url: https://developer.hypixel.net
+  x-jentic-source-url: https://api.hypixel.net/
+  x-generated-from: jentic-public-apis
+  x-last-validated: '2026-05-30'
+servers:
+- url: https://api.hypixel.net
+security:
+- ApiKey: []
+tags:
+- name: Housing
+  description: Hypixel Housing — active public houses, per-player public houses, and per-house information.
+paths:
+  /v2/housing/active:
+    get:
+      summary: Hypixel The Currently Active Public Houses.
+      description: This data may be cached for a short period of time.
+      tags:
+      - Housing
+      security:
+      - ApiKey: []
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HousingHouse'
+              examples:
+                GetHousingActive200Example:
+                  summary: Default getHousingActive 200 response
+                  x-microcks-default: true
+                  value:
+                  - example
+        '403':
+          $ref: '#/components/responses/InvalidKey'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+      operationId: getHousingActive
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v2/housing/house:
+    get:
+      summary: Hypixel Information About a Specific House.
+      description: This data may be cached for a short period of time.
+      tags:
+      - Housing
+      security:
+      - ApiKey: []
+      parameters:
+      - in: query
+        name: house
+        schema:
+          type: string
+        required: true
+        description: The UUID of the house to get information about.
+        example: example
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HousingHouse'
+              examples:
+                GetHousingHouse200Example:
+                  summary: Default getHousingHouse 200 response
+                  x-microcks-default: true
+                  value: example
+        '403':
+          $ref: '#/components/responses/InvalidKey'
+        '404':
+          $ref: '#/components/responses/NoResult'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+      operationId: getHousingHouse
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /v2/housing/houses:
+    get:
+      summary: Hypixel The Public Houses for a Specific Player.
+      description: This data may be cached for a short period of time.
+      tags:
+      - Housing
+      security:
+      - ApiKey: []
+      parameters:
+      - in: query
+        name: player
+        schema:
+          type: string
+        description: The UUID of the player to get houses for.
+        example: example
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HousingHouse'
+              examples:
+                GetHousingHouses200Example:
+                  summary: Default getHousingHouses 200 response
+                  x-microcks-default: true
+                  value:
+                  - example
+        '403':
+          $ref: '#/components/responses/InvalidKey'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+      operationId: getHousingHouses
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    InvalidKey:
+      description: Access is forbidden, usually due to an invalid API key being used.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Invalid API key
+    RateLimited:
+      description: A request limit has been reached, usually this is due to the limit on the key being reached but can also be triggered by a global throttle.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Key throttle
+              throttle:
+                type: boolean
+                example: true
+              global:
+                type: boolean
+                description: When this boolean exists and is true, the throttle occurring is a global throttle applied to all users
+                example: true
+    NoResult:
+      description: The request responded with no result.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: No result was found
+  schemas:
+    HousingHouse:
+      description: Information about a player's house.
+      required:
+      - uuid
+      - owner
+      - name
+      - createdAt
+      - players
+      - cookies
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: The UUID of this house.
+          example: ad8fefaa8351454bb739a4eaa872173f
+        owner:
+          type: string
+          format: uuid
+          description: The UUID of the owner of this house.
+          example: ad8fefaa8351454bb739a4eaa872173f
+        name:
+          type: string
+          nullable: true
+          description: The name of this house, may contain Minecraft color symbols.
+          example: ExamplePlayer
+        createdAt:
+          type: number
+          format: int64
+          description: The time this house was created.
+          example: 1.0
+        players:
+          type: number
+          format: int32
+          description: The number of players in this house.
+          example: 1.0
+        cookies:
+          type: object
+          properties:
+            current:
+              type: number
+              format: int32
+              description: The current amount of cookies that this house has for the current week.
+              example: 1.0
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: header
+      name: API-Key
+      description: Obtained via the [Hypixel Developer Dashboard](https://developer.hypixel.net) when creating an application. You can also request higher limits for production applications in this dashboard.

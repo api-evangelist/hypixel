@@ -1,0 +1,308 @@
+openapi: 3.0.3
+info:
+  title: Hypixel Public Housing Other API
+  x-logo:
+    url: https://api.hypixel.net/assets/images/logo.png
+    altText: Hypixel Logo
+    href: '#'
+  description: "# Introduction\nThis is the official Hypixel API documentation. [Hypixel Website](https://hypixel.net/) - [GitHub Repo](https://github.com/HypixelDev/PublicAPI) - [API Help Forum](https://hypixel.net/forums/api-help.111/)\n\nAll use of the API must conform to the [API policies](https://developer.hypixel.net/policies), violation of these policies may lead to applications being revoked or users banned from the API.\n## Limits\nAPI keys are limited to a maximum amount of requests per 5 minute intervals. These limits will depend on the type of application that the key is assigned to.\n\nEndpoints which require the use of an API key will also respond with headers to assist with managing the rate limit:\n- 'RateLimit-Limit' - The limit of requests per minute for the provided API key.\n- 'RateLimit-Remaining' - The remaining amount of requests allowed for the current minute.\n- 'RateLimit-Reset' - The amount of seconds until the next minute and the reset of the API key usages.\n\n## GameTypes\n| ID | Type Name      | Database Name | Clean Name           |\n |----|----------------|---------------|----------------------|\n | 2  | QUAKECRAFT     | Quake         | Quake                |\n | 3  | WALLS          | Walls         | Walls                |\n | 4  | PAINTBALL      | Paintball     | Paintball            |\n | 5  | SURVIVAL_GAMES | HungerGames   | Blitz Survival Games |\n | 6  | TNTGAMES       | TNTGames      | TNT Games            |\n | 7  | VAMPIREZ       | VampireZ      | VampireZ             |\n | 13 | WALLS3         | Walls3        | Mega Walls           |\n | 14 | ARCADE         | Arcade        | Arcade               |\n | 17 | ARENA          | Arena         | Arena                |\n | 20 | UHC            | UHC           | UHC Champions        |\n | 21 | MCGO           | MCGO          | Cops and Crims       |\n | 23 | BATTLEGROUND   | Battleground  | Warlords             |\n | 24 | SUPER_SMASH    | SuperSmash    | Smash Heroes         |\n | 25 | GINGERBREAD    | GingerBread   | Turbo Kart Racers    |\n | 26 | HOUSING        | Housing       | Housing              |\n | 51 | SKYWARS        | SkyWars       | SkyWars              |\n | 52 | TRUE_COMBAT    | TrueCombat    | Crazy Walls          |\n | 54 | SPEED_UHC      | SpeedUHC      | Speed UHC            |\n | 55 | SKYCLASH       | SkyClash      | SkyClash             |\n | 56 | LEGACY         | Legacy        | Classic Games        |\n | 57 | PROTOTYPE      | Prototype     | Prototype            |\n | 58 | BEDWARS        | Bedwars       | Bed Wars             |\n | 59 | MURDER_MYSTERY | MurderMystery | Murder Mystery       |\n | 60 | BUILD_BATTLE   | BuildBattle   | Build Battle         |\n | 61 | DUELS          | Duels         | Duels                |\n | 63 | SKYBLOCK       | SkyBlock      | SkyBlock             |\n | 64 | PIT            | Pit           | Pit                  |\n | 65 | REPLAY         | Replay        | Replay               |\n | 67 | SMP            | SMP           | SMP                  |\n | 68 | WOOL_GAMES     | WoolGames     | Wool Wars            |\n\n### Storage\nGames store their respective stats and data in a Player's `stats` collection. The game's specific data is held within a JSON object named after it's `Database Name` (seen above.)\n### GameType Notes\n* Clean names are what is displayed to the user when referencing the name.\n* Database names or IDs are used when the API references a specific GameType.\n## Notes\n\n### Date and Time\nGenerally dates are stored as a Unix Epoch times in milliseconds.\n### Response Format\nResponses are served in JSON format.\n### UUID Parameters\nAll uuid parameters support both dashed and undashed versions.\n### SkyBlock items and inventories\nItems and inventory data are stored as a base64 encoded string containing gzipped nbt data.\nIf a method is missing important information about an item or inventory, you should try checking this!\n>Note: the base64 string may contain a unicode escape for non-alphabetical symbols, and some programming languages may have silent defects when interpreting the string. \n\n# Authentication\n\n<!-- ReDoc-Inject: <security-definitions> -->"
+  version: v2
+  termsOfService: https://hypixel.net/tos
+  contact:
+    name: Hypixel Support
+    url: https://developer.hypixel.net
+  x-jentic-source-url: https://api.hypixel.net/
+  x-generated-from: jentic-public-apis
+  x-last-validated: '2026-05-30'
+servers:
+- url: https://api.hypixel.net
+security:
+- ApiKey: []
+tags:
+- name: Other
+  description: Network-wide telemetry — boosters, counts, leaderboards, punishment statistics.
+paths:
+  /v2/boosters:
+    get:
+      summary: Hypixel Active Network Boosters
+      tags:
+      - Other
+      security:
+      - ApiKey: []
+      responses:
+        '200':
+          description: Get boosters list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  boosters:
+                    type: array
+                    items:
+                      oneOf:
+                      - $ref: '#/components/schemas/ActiveBooster'
+                      - $ref: '#/components/schemas/QueuedBooster'
+                  boosterState:
+                    type: object
+                    properties:
+                      decrementing:
+                        type: boolean
+              examples:
+                GetBoosters200Example:
+                  summary: Default getBoosters 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    boosters:
+                    - example
+                    boosterState:
+                      decrementing: true
+        '403':
+          $ref: '#/components/responses/InvalidKey'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+      operationId: getBoosters
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      description: Active Network Boosters
+  /v2/counts:
+    get:
+      summary: Hypixel Current Player Counts
+      tags:
+      - Other
+      security:
+      - ApiKey: []
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  playerCount:
+                    type: integer
+                  games:
+                    type: object
+                    example:
+                      GAME_TYPE:
+                        players: 2
+                        modes:
+                          mode_1: 1
+                          mode_2: 1
+              examples:
+                GetCounts200Example:
+                  summary: Default getCounts 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    playerCount: 42
+                    games:
+                      GAME_TYPE:
+                        players: 2
+                        modes:
+                          mode_1: 1
+                          mode_2: 1
+        '403':
+          $ref: '#/components/responses/InvalidKey'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+      operationId: getCounts
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      description: Current Player Counts
+  /v2/leaderboards:
+    get:
+      summary: Hypixel Current Leaderboards
+      tags:
+      - Other
+      security:
+      - ApiKey: []
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  leaderboards:
+                    type: object
+              examples:
+                GetLeaderboards200Example:
+                  summary: Default getLeaderboards 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    leaderboards: {}
+        '403':
+          $ref: '#/components/responses/InvalidKey'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/NotPopulated'
+      operationId: getLeaderboards
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      description: Current Leaderboards
+  /v2/punishmentstats:
+    get:
+      tags:
+      - Other
+      summary: Hypixel Punishment Statistics
+      security:
+      - ApiKey: []
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  watchdog_lastMinute:
+                    type: integer
+                  staff_rollingDaily:
+                    type: integer
+                  watchdog_total:
+                    type: integer
+                  watchdog_rollingDaily:
+                    type: integer
+                  staff_total:
+                    type: integer
+              examples:
+                GetPunishmentstats200Example:
+                  summary: Default getPunishmentstats 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    watchdog_lastMinute: 42
+                    staff_rollingDaily: 42
+                    watchdog_total: 42
+                    watchdog_rollingDaily: 42
+                    staff_total: 42
+        '403':
+          $ref: '#/components/responses/InvalidKey'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/NotPopulated'
+      operationId: getPunishmentstats
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      description: Punishment Statistics
+components:
+  responses:
+    InvalidKey:
+      description: Access is forbidden, usually due to an invalid API key being used.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Invalid API key
+    RateLimited:
+      description: A request limit has been reached, usually this is due to the limit on the key being reached but can also be triggered by a global throttle.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Key throttle
+              throttle:
+                type: boolean
+                example: true
+              global:
+                type: boolean
+                description: When this boolean exists and is true, the throttle occurring is a global throttle applied to all users
+                example: true
+    NotPopulated:
+      description: The data is not yet populated and should be available shortly
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Leaderboard data has not yet been populated
+  schemas:
+    QueuedBooster:
+      allOf:
+      - $ref: '#/components/schemas/Booster'
+      - type: object
+        properties:
+          stacked:
+            type: boolean
+            nullable: true
+    ActiveBooster:
+      allOf:
+      - $ref: '#/components/schemas/Booster'
+      - type: object
+        properties:
+          stacked:
+            type: array
+            nullable: true
+            items:
+              type: string
+              description: UUID of the player in a dashed format
+              format: uuid
+              example: ad8fefaa-8351-454b-b739-a4eaa872173f
+    Booster:
+      properties:
+        _id:
+          type: string
+          format: objectid
+          example: 5fcbf9d9d295e80a766f3b14
+        purchaserUuid:
+          type: string
+          format: uuid
+          example: ad8fefaa8351454bb739a4eaa872173f
+        amount:
+          type: number
+          example: 1.0
+        originalLength:
+          type: integer
+          example: 42
+        length:
+          type: integer
+          example: 42
+        gameType:
+          type: integer
+          example: 42
+        dateActivated:
+          type: integer
+          format: int64
+          example: 1748544600000
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: header
+      name: API-Key
+      description: Obtained via the [Hypixel Developer Dashboard](https://developer.hypixel.net) when creating an application. You can also request higher limits for production applications in this dashboard.

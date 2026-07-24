@@ -1,0 +1,386 @@
+openapi: 3.0.3
+info:
+  title: Hypixel Public Housing Player Data API
+  x-logo:
+    url: https://api.hypixel.net/assets/images/logo.png
+    altText: Hypixel Logo
+    href: '#'
+  description: "# Introduction\nThis is the official Hypixel API documentation. [Hypixel Website](https://hypixel.net/) - [GitHub Repo](https://github.com/HypixelDev/PublicAPI) - [API Help Forum](https://hypixel.net/forums/api-help.111/)\n\nAll use of the API must conform to the [API policies](https://developer.hypixel.net/policies), violation of these policies may lead to applications being revoked or users banned from the API.\n## Limits\nAPI keys are limited to a maximum amount of requests per 5 minute intervals. These limits will depend on the type of application that the key is assigned to.\n\nEndpoints which require the use of an API key will also respond with headers to assist with managing the rate limit:\n- 'RateLimit-Limit' - The limit of requests per minute for the provided API key.\n- 'RateLimit-Remaining' - The remaining amount of requests allowed for the current minute.\n- 'RateLimit-Reset' - The amount of seconds until the next minute and the reset of the API key usages.\n\n## GameTypes\n| ID | Type Name      | Database Name | Clean Name           |\n |----|----------------|---------------|----------------------|\n | 2  | QUAKECRAFT     | Quake         | Quake                |\n | 3  | WALLS          | Walls         | Walls                |\n | 4  | PAINTBALL      | Paintball     | Paintball            |\n | 5  | SURVIVAL_GAMES | HungerGames   | Blitz Survival Games |\n | 6  | TNTGAMES       | TNTGames      | TNT Games            |\n | 7  | VAMPIREZ       | VampireZ      | VampireZ             |\n | 13 | WALLS3         | Walls3        | Mega Walls           |\n | 14 | ARCADE         | Arcade        | Arcade               |\n | 17 | ARENA          | Arena         | Arena                |\n | 20 | UHC            | UHC           | UHC Champions        |\n | 21 | MCGO           | MCGO          | Cops and Crims       |\n | 23 | BATTLEGROUND   | Battleground  | Warlords             |\n | 24 | SUPER_SMASH    | SuperSmash    | Smash Heroes         |\n | 25 | GINGERBREAD    | GingerBread   | Turbo Kart Racers    |\n | 26 | HOUSING        | Housing       | Housing              |\n | 51 | SKYWARS        | SkyWars       | SkyWars              |\n | 52 | TRUE_COMBAT    | TrueCombat    | Crazy Walls          |\n | 54 | SPEED_UHC      | SpeedUHC      | Speed UHC            |\n | 55 | SKYCLASH       | SkyClash      | SkyClash             |\n | 56 | LEGACY         | Legacy        | Classic Games        |\n | 57 | PROTOTYPE      | Prototype     | Prototype            |\n | 58 | BEDWARS        | Bedwars       | Bed Wars             |\n | 59 | MURDER_MYSTERY | MurderMystery | Murder Mystery       |\n | 60 | BUILD_BATTLE   | BuildBattle   | Build Battle         |\n | 61 | DUELS          | Duels         | Duels                |\n | 63 | SKYBLOCK       | SkyBlock      | SkyBlock             |\n | 64 | PIT            | Pit           | Pit                  |\n | 65 | REPLAY         | Replay        | Replay               |\n | 67 | SMP            | SMP           | SMP                  |\n | 68 | WOOL_GAMES     | WoolGames     | Wool Wars            |\n\n### Storage\nGames store their respective stats and data in a Player's `stats` collection. The game's specific data is held within a JSON object named after it's `Database Name` (seen above.)\n### GameType Notes\n* Clean names are what is displayed to the user when referencing the name.\n* Database names or IDs are used when the API references a specific GameType.\n## Notes\n\n### Date and Time\nGenerally dates are stored as a Unix Epoch times in milliseconds.\n### Response Format\nResponses are served in JSON format.\n### UUID Parameters\nAll uuid parameters support both dashed and undashed versions.\n### SkyBlock items and inventories\nItems and inventory data are stored as a base64 encoded string containing gzipped nbt data.\nIf a method is missing important information about an item or inventory, you should try checking this!\n>Note: the base64 string may contain a unicode escape for non-alphabetical symbols, and some programming languages may have silent defects when interpreting the string. \n\n# Authentication\n\n<!-- ReDoc-Inject: <security-definitions> -->"
+  version: v2
+  termsOfService: https://hypixel.net/tos
+  contact:
+    name: Hypixel Support
+    url: https://developer.hypixel.net
+  x-jentic-source-url: https://api.hypixel.net/
+  x-generated-from: jentic-public-apis
+  x-last-validated: '2026-05-30'
+servers:
+- url: https://api.hypixel.net
+security:
+- ApiKey: []
+tags:
+- name: Player Data
+  description: Hypixel network player profiles, recent games, online status, friends, and guild lookups.
+paths:
+  /v2/player:
+    get:
+      summary: Hypixel Data of a Specific Player, Including Game Stats
+      tags:
+      - Player Data
+      security:
+      - ApiKey: []
+      parameters:
+      - in: query
+        name: uuid
+        schema:
+          type: string
+        required: true
+        example: ad8fefaa8351454bb739a4eaa872173f
+        description: The uuid parameter.
+      responses:
+        '200':
+          description: Get player's data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  player:
+                    type: object
+                    properties:
+                      uuid:
+                        type: string
+                        example: 3fa85f6457174562b3fc2c963f66afa6
+                      displayname:
+                        type: string
+                        nullable: true
+                      rank:
+                        type: string
+                        nullable: true
+                        enum:
+                        - ADMIN
+                        - MODERATOR
+                        - HELPER
+                        - NORMAL
+                      packageRank:
+                        type: string
+                        nullable: true
+                        enum:
+                        - MVP_PLUS
+                        - MVP
+                        - VIP_PLUS
+                        - VIP
+                        - NONE
+                      newPackageRank:
+                        type: string
+                        nullable: true
+                        enum:
+                        - MVP_PLUS
+                        - MVP
+                        - VIP_PLUS
+                        - VIP
+                        - NONE
+                      monthlyPackageRank:
+                        type: string
+                        nullable: true
+                        enum:
+                        - SUPERSTAR
+                        - NONE
+                      firstLogin:
+                        type: number
+                        nullable: true
+                      lastLogin:
+                        type: number
+                        nullable: true
+                      lastLogout:
+                        type: number
+                        nullable: true
+                      stats:
+                        type: object
+                        nullable: true
+              examples:
+                GetPlayer200Example:
+                  summary: Default getPlayer 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    player:
+                      uuid: 3fa85f6457174562b3fc2c963f66afa6
+                      displayname: ExamplePlayer
+                      rank: ADMIN
+                      packageRank: MVP_PLUS
+                      newPackageRank: MVP_PLUS
+                      monthlyPackageRank: SUPERSTAR
+        '400':
+          $ref: '#/components/responses/DataMissing'
+        '403':
+          $ref: '#/components/responses/InvalidKey'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+      operationId: getPlayer
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      description: Data of a specific player, including game stats
+  /v2/recentgames:
+    get:
+      summary: Hypixel The Recently Played Games of a Specific Player
+      tags:
+      - Player Data
+      security:
+      - ApiKey: []
+      parameters:
+      - in: query
+        name: uuid
+        schema:
+          type: string
+        required: true
+        example: ad8fefaa8351454bb739a4eaa872173f
+        description: The uuid parameter.
+      responses:
+        '200':
+          description: Get player's recent game
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  uuid:
+                    type: string
+                    format: uuid
+                  games:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        date:
+                          type: number
+                          format: int64
+                        gameType:
+                          type: string
+                        mode:
+                          type: string
+                        map:
+                          type: string
+                        ended:
+                          type: number
+                          format: int64
+              examples:
+                GetRecentgames200Example:
+                  summary: Default getRecentgames 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    uuid: ad8fefaa8351454bb739a4eaa872173f
+                    games:
+                    - date: 1.0
+                      gameType: example
+                      mode: example
+                      map: example
+                      ended: 1.0
+        '400':
+          $ref: '#/components/responses/DataMissing'
+        '403':
+          $ref: '#/components/responses/InvalidKey'
+        '422':
+          $ref: '#/components/responses/MalformedData'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+      operationId: getRecentgames
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      description: The recently played games of a specific player
+  /v2/status:
+    get:
+      summary: Hypixel The Current Online Status of a Specific Player
+      tags:
+      - Player Data
+      security:
+      - ApiKey: []
+      parameters:
+      - in: query
+        name: uuid
+        schema:
+          type: string
+        required: true
+        example: ad8fefaa8351454bb739a4eaa872173f
+        description: The uuid parameter.
+      responses:
+        '200':
+          description: Get player status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  uuid:
+                    type: string
+                    format: uuid
+                    example: ad8fefaa8351454bb739a4eaa872173f
+                  session:
+                    type: object
+                    properties:
+                      online:
+                        type: boolean
+                      gameType:
+                        type: string
+                      mode:
+                        type: string
+                      map:
+                        type: string
+              examples:
+                GetStatus200Example:
+                  summary: Default getStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    uuid: ad8fefaa8351454bb739a4eaa872173f
+                    session:
+                      online: true
+                      gameType: example
+                      mode: example
+                      map: example
+        '400':
+          $ref: '#/components/responses/DataMissing'
+        '403':
+          $ref: '#/components/responses/InvalidKey'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+      operationId: getStatus
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      description: The current online status of a specific player
+  /v2/guild:
+    get:
+      summary: Hypixel Retrieve a Guild by a Player, Id, or Name
+      tags:
+      - Player Data
+      security:
+      - ApiKey: []
+      parameters:
+      - in: query
+        name: id
+        schema:
+          type: string
+          format: objectid
+        example: 5fcbf9d9d295e80a766f3b14
+        description: The id parameter.
+      - in: query
+        name: player
+        schema:
+          type: string
+          format: uuid
+        example: ad8fefaa8351454bb739a4eaa872173f
+        description: The player parameter.
+      - in: query
+        name: name
+        schema:
+          type: string
+        example: ExamplePlayer
+        description: The name parameter.
+      responses:
+        '200':
+          description: Get guild information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  guild:
+                    type: object
+              examples:
+                GetGuild200Example:
+                  summary: Default getGuild 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    guild: {}
+        '400':
+          $ref: '#/components/responses/DataMissing'
+        '403':
+          $ref: '#/components/responses/InvalidKey'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+      operationId: getGuild
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      description: Retrieve a Guild by a player, id, or name
+components:
+  responses:
+    RateLimited:
+      description: A request limit has been reached, usually this is due to the limit on the key being reached but can also be triggered by a global throttle.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Key throttle
+              throttle:
+                type: boolean
+                example: true
+              global:
+                type: boolean
+                description: When this boolean exists and is true, the throttle occurring is a global throttle applied to all users
+                example: true
+    MalformedData:
+      description: Some data provided is invalid.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Malformed UUID
+    InvalidKey:
+      description: Access is forbidden, usually due to an invalid API key being used.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Invalid API key
+    DataMissing:
+      description: Some data is missing, this is usually a field.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Missing one or more fields [...]
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: header
+      name: API-Key
+      description: Obtained via the [Hypixel Developer Dashboard](https://developer.hypixel.net) when creating an application. You can also request higher limits for production applications in this dashboard.
