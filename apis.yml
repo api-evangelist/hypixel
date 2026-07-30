@@ -1,4 +1,18 @@
 aid: hypixel
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/hypixel.png
 name: Hypixel
 description: >-
   Hypixel Public API — the official REST API of the Hypixel Minecraft server network, the largest Minecraft minigame
@@ -24,36 +38,112 @@ tags:
   - SkyBlock
   - Public APIs
 apis:
-  - name: Hypixel Public API
-    description: >-
-      Read-only REST API exposing player, guild, recent games, online status, server counts, boosters, leaderboards,
-      punishment statistics, housing, and the full SkyBlock economy (auctions, bazaar, profiles, museum, garden, bingo,
-      fire sales) for the Hypixel Minecraft network. All endpoints are HTTP GET, JSON, and authenticated with an API key
-      issued via the Hypixel Developer Dashboard.
-    humanURL: https://api.hypixel.net/
-    baseURL: https://api.hypixel.net/v2
-    version: v2
-    tags:
-      - Games And Comics
-      - Gaming
-      - Minecraft
-      - Player Stats
-      - SkyBlock
-    properties:
-      - type: Documentation
-        url: https://api.hypixel.net/
-      - type: DeveloperPortal
-        url: https://developer.hypixel.net/
-      - type: Policies
-        url: https://developer.hypixel.net/policies
-      - type: OpenAPI
-        url: openapi/hypixel-public-api-openapi.yml
-      - type: SDKs
-        title: Java SDK
-        url: https://github.com/HypixelDev/PublicAPI
-      - type: CodeExamples
-        title: Java Examples
-        url: https://github.com/HypixelDev/PublicAPI/tree/master/hypixel-api-example
+- aid: hypixel:hypixel-housing-api
+  name: Hypixel Housing API
+  description: >-
+    Hypixel Housing — active public houses, per-player public houses, and per-house information.
+  humanURL: https://api.hypixel.net/
+  baseURL: https://api.hypixel.net/v2
+  tags:
+  - Housing
+  properties:
+  - type: OpenAPI
+    url: openapi/hypixel-housing-api-openapi.yml
+  - type: Documentation
+    url: https://api.hypixel.net/
+  - type: DeveloperPortal
+    url: https://developer.hypixel.net/
+  - type: Policies
+    url: https://developer.hypixel.net/policies
+  - type: SDKs
+    url: https://github.com/HypixelDev/PublicAPI
+  - type: CodeExamples
+    url: https://github.com/HypixelDev/PublicAPI/tree/master/hypixel-api-example
+- aid: hypixel:hypixel-other-api
+  name: Hypixel Other API
+  description: Network-wide telemetry — boosters, counts, leaderboards, punishment statistics.
+  humanURL: https://api.hypixel.net/
+  baseURL: https://api.hypixel.net/v2
+  tags:
+  - Other
+  properties:
+  - type: OpenAPI
+    url: openapi/hypixel-other-api-openapi.yml
+  - type: Documentation
+    url: https://api.hypixel.net/
+  - type: DeveloperPortal
+    url: https://developer.hypixel.net/
+  - type: Policies
+    url: https://developer.hypixel.net/policies
+  - type: SDKs
+    url: https://github.com/HypixelDev/PublicAPI
+  - type: CodeExamples
+    url: https://github.com/HypixelDev/PublicAPI/tree/master/hypixel-api-example
+- aid: hypixel:hypixel-player-data-api
+  name: Hypixel Player Data API
+  description: >-
+    Hypixel network player profiles, recent games, online status, friends, and guild lookups.
+  humanURL: https://api.hypixel.net/
+  baseURL: https://api.hypixel.net/v2
+  tags:
+  - Player Data
+  properties:
+  - type: OpenAPI
+    url: openapi/hypixel-player-data-api-openapi.yml
+  - type: Documentation
+    url: https://api.hypixel.net/
+  - type: DeveloperPortal
+    url: https://developer.hypixel.net/
+  - type: Policies
+    url: https://developer.hypixel.net/policies
+  - type: SDKs
+    url: https://github.com/HypixelDev/PublicAPI
+  - type: CodeExamples
+    url: https://github.com/HypixelDev/PublicAPI/tree/master/hypixel-api-example
+- aid: hypixel:hypixel-resources-api
+  name: Hypixel Resources API
+  description: >-
+    Static reference data — games, achievements, challenges, quests, guild achievements, vanity pets and
+    companions.
+  humanURL: https://api.hypixel.net/
+  baseURL: https://api.hypixel.net/v2
+  tags:
+  - Resources
+  properties:
+  - type: OpenAPI
+    url: openapi/hypixel-resources-api-openapi.yml
+  - type: Documentation
+    url: https://api.hypixel.net/
+  - type: DeveloperPortal
+    url: https://developer.hypixel.net/
+  - type: Policies
+    url: https://developer.hypixel.net/policies
+  - type: SDKs
+    url: https://github.com/HypixelDev/PublicAPI
+  - type: CodeExamples
+    url: https://github.com/HypixelDev/PublicAPI/tree/master/hypixel-api-example
+- aid: hypixel:hypixel-skyblock-api
+  name: Hypixel SkyBlock API
+  description: >-
+    Hypixel SkyBlock — auctions, bazaar, profiles, museum, garden, bingo, fire sales, and SkyBlock-specific
+    reference data.
+  humanURL: https://api.hypixel.net/
+  baseURL: https://api.hypixel.net/v2
+  tags:
+  - SkyBlock
+  properties:
+  - type: OpenAPI
+    url: openapi/hypixel-skyblock-api-openapi.yml
+  - type: Documentation
+    url: https://api.hypixel.net/
+  - type: DeveloperPortal
+    url: https://developer.hypixel.net/
+  - type: Policies
+    url: https://developer.hypixel.net/policies
+  - type: SDKs
+    url: https://github.com/HypixelDev/PublicAPI
+  - type: CodeExamples
+    url: https://github.com/HypixelDev/PublicAPI/tree/master/hypixel-api-example
 common:
   - type: AgenticAccess
     url: agentic-access/hypixel-agentic-access.yml
