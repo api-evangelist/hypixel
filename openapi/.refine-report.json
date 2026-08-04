@@ -1,0 +1,22 @@
+{
+  "provider": "hypixel",
+  "sources": [
+    "hypixel-housing-api-openapi.yml",
+    "hypixel-other-api-openapi.yml",
+    "hypixel-player-data-api-openapi.yml",
+    "hypixel-resources-api-openapi.yml",
+    "hypixel-skyblock-api-openapi.yml"
+  ],
+  "outputs": [
+    "hypixel-housing-api-openapi.yml",
+    "hypixel-other-api-openapi.yml",
+    "hypixel-player-data-api-openapi.yml",
+    "hypixel-resources-api-openapi.yml",
+    "hypixel-skyblock-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
