@@ -145,6 +145,13 @@ apis:
   - type: CodeExamples
     url: https://github.com/HypixelDev/PublicAPI/tree/master/hypixel-api-example
 common:
+  - type: IssueTracker
+    url: https://github.com/HypixelDev/PublicAPI/issues
+  - type: Releases
+    url: https://github.com/HypixelDev/PublicAPI/releases
+  - type: License
+    name: MIT
+    url: https://github.com/HypixelDev/PublicAPI/blob/master/LICENSE
   - type: AgenticAccess
     url: agentic-access/hypixel-agentic-access.yml
   - type: VulnerabilityDisclosure
