@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Hypixel Public Housing Resources API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "API-Key",
+      "value": "{{API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Resources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Hypixel Game Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/resources/games"
+          },
+          "docs": "Returns information about Hypixel Games. This endpoint is in early development and we are working to add more information when possible <a href=\"https://github.com/HypixelDev/PublicAPI/discussions/197#discussioncomment-1047648\">HypixelDev/PublicAPI#197</a>"
+        },
+        {
+          "info": {
+            "name": "Hypixel Achievements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/resources/achievements"
+          },
+          "docs": "Achievements"
+        },
+        {
+          "info": {
+            "name": "Hypixel Challenges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/resources/challenges"
+          },
+          "docs": "Challenges"
+        },
+        {
+          "info": {
+            "name": "Hypixel Quests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/resources/quests"
+          },
+          "docs": "Quests"
+        },
+        {
+          "info": {
+            "name": "Hypixel Guild Achievements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/resources/guilds/achievements"
+          },
+          "docs": "Guild Achievements"
+        },
+        {
+          "info": {
+            "name": "Hypixel Vanity Pets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/resources/vanity/pets"
+          },
+          "docs": "Vanity Pets"
+        },
+        {
+          "info": {
+            "name": "Hypixel Vanity Companions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/resources/vanity/companions"
+          },
+          "docs": "Vanity Companions"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

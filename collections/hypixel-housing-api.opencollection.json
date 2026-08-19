@@ -1,0 +1,93 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Hypixel Public Housing API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "API-Key",
+      "value": "{{API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Housing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Hypixel The Currently Active Public Houses.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/housing/active",
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This data may be cached for a short period of time."
+        },
+        {
+          "info": {
+            "name": "Hypixel Information About a Specific House.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/housing/house",
+            "params": [
+              {
+                "name": "house",
+                "value": "example",
+                "type": "query",
+                "description": "The UUID of the house to get information about."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This data may be cached for a short period of time."
+        },
+        {
+          "info": {
+            "name": "Hypixel The Public Houses for a Specific Player.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/housing/houses",
+            "params": [
+              {
+                "name": "player",
+                "value": "example",
+                "type": "query",
+                "description": "The UUID of the player to get houses for."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This data may be cached for a short period of time."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

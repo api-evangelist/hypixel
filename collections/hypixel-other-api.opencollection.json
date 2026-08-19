@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Hypixel Public Housing Other API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "API-Key",
+      "value": "{{API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Other",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Hypixel Active Network Boosters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/boosters",
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Active Network Boosters"
+        },
+        {
+          "info": {
+            "name": "Hypixel Current Player Counts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/counts",
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Current Player Counts"
+        },
+        {
+          "info": {
+            "name": "Hypixel Current Leaderboards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/leaderboards",
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Current Leaderboards"
+        },
+        {
+          "info": {
+            "name": "Hypixel Punishment Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/punishmentstats",
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Punishment Statistics"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

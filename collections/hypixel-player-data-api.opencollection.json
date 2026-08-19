@@ -1,0 +1,138 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Hypixel Public Housing Player Data API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "API-Key",
+      "value": "{{API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Player Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Hypixel Data of a Specific Player, Including Game Stats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/player",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "ad8fefaa8351454bb739a4eaa872173f",
+                "type": "query",
+                "description": "The uuid parameter."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Data of a specific player, including game stats"
+        },
+        {
+          "info": {
+            "name": "Hypixel The Recently Played Games of a Specific Player",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/recentgames",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "ad8fefaa8351454bb739a4eaa872173f",
+                "type": "query",
+                "description": "The uuid parameter."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "The recently played games of a specific player"
+        },
+        {
+          "info": {
+            "name": "Hypixel The Current Online Status of a Specific Player",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/status",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "ad8fefaa8351454bb739a4eaa872173f",
+                "type": "query",
+                "description": "The uuid parameter."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "The current online status of a specific player"
+        },
+        {
+          "info": {
+            "name": "Hypixel Retrieve a Guild by a Player, Id, or Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.hypixel.net/v2/guild",
+            "params": [
+              {
+                "name": "id",
+                "value": "5fcbf9d9d295e80a766f3b14",
+                "type": "query",
+                "description": "The id parameter."
+              },
+              {
+                "name": "player",
+                "value": "ad8fefaa8351454bb739a4eaa872173f",
+                "type": "query",
+                "description": "The player parameter."
+              },
+              {
+                "name": "name",
+                "value": "ExamplePlayer",
+                "type": "query",
+                "description": "The name parameter."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "API-Key",
+              "value": "{{API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a Guild by a player, id, or name"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
