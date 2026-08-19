@@ -21,7 +21,7 @@ description: >-
   profiles, museum, garden, bingo, fire sales). All endpoints are read-only HTTP GET requests returning JSON,
   authenticated with a per-application API key issued via the Hypixel Developer Dashboard.
 url: https://api.hypixel.net/
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-05-28'
 modified: '2026-05-30'
 x-source: public-apis/public-apis
