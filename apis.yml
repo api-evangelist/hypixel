@@ -64,7 +64,8 @@ apis:
   description: Network-wide telemetry — boosters, counts, leaderboards, punishment statistics.
   humanURL: https://api.hypixel.net/
   baseURL: https://api.hypixel.net/v2
-  tags:
+  tags: []
+  tags_raw:
   - Other
   properties:
   - type: OpenAPI
