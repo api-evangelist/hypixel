@@ -1,11 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Hypixel Public Housing SkyBlock API
+  title: Hypixel Public Sky Block API
   x-logo:
     url: https://api.hypixel.net/assets/images/logo.png
     altText: Hypixel Logo
     href: '#'
-  description: "# Introduction\nThis is the official Hypixel API documentation. [Hypixel Website](https://hypixel.net/) - [GitHub Repo](https://github.com/HypixelDev/PublicAPI) - [API Help Forum](https://hypixel.net/forums/api-help.111/)\n\nAll use of the API must conform to the [API policies](https://developer.hypixel.net/policies), violation of these policies may lead to applications being revoked or users banned from the API.\n## Limits\nAPI keys are limited to a maximum amount of requests per 5 minute intervals. These limits will depend on the type of application that the key is assigned to.\n\nEndpoints which require the use of an API key will also respond with headers to assist with managing the rate limit:\n- 'RateLimit-Limit' - The limit of requests per minute for the provided API key.\n- 'RateLimit-Remaining' - The remaining amount of requests allowed for the current minute.\n- 'RateLimit-Reset' - The amount of seconds until the next minute and the reset of the API key usages.\n\n## GameTypes\n| ID | Type Name      | Database Name | Clean Name           |\n |----|----------------|---------------|----------------------|\n | 2  | QUAKECRAFT     | Quake         | Quake                |\n | 3  | WALLS          | Walls         | Walls                |\n | 4  | PAINTBALL      | Paintball     | Paintball            |\n | 5  | SURVIVAL_GAMES | HungerGames   | Blitz Survival Games |\n | 6  | TNTGAMES       | TNTGames      | TNT Games            |\n | 7  | VAMPIREZ       | VampireZ      | VampireZ             |\n | 13 | WALLS3         | Walls3        | Mega Walls           |\n | 14 | ARCADE         | Arcade        | Arcade               |\n | 17 | ARENA          | Arena         | Arena                |\n | 20 | UHC            | UHC           | UHC Champions        |\n | 21 | MCGO           | MCGO          | Cops and Crims       |\n | 23 | BATTLEGROUND   | Battleground  | Warlords             |\n | 24 | SUPER_SMASH    | SuperSmash    | Smash Heroes         |\n | 25 | GINGERBREAD    | GingerBread   | Turbo Kart Racers    |\n | 26 | HOUSING        | Housing       | Housing              |\n | 51 | SKYWARS        | SkyWars       | SkyWars              |\n | 52 | TRUE_COMBAT    | TrueCombat    | Crazy Walls          |\n | 54 | SPEED_UHC      | SpeedUHC      | Speed UHC            |\n | 55 | SKYCLASH       | SkyClash      | SkyClash             |\n | 56 | LEGACY         | Legacy        | Classic Games        |\n | 57 | PROTOTYPE      | Prototype     | Prototype            |\n | 58 | BEDWARS        | Bedwars       | Bed Wars             |\n | 59 | MURDER_MYSTERY | MurderMystery | Murder Mystery       |\n | 60 | BUILD_BATTLE   | BuildBattle   | Build Battle         |\n | 61 | DUELS          | Duels         | Duels                |\n | 63 | SKYBLOCK       | SkyBlock      | SkyBlock             |\n | 64 | PIT            | Pit           | Pit                  |\n | 65 | REPLAY         | Replay        | Replay               |\n | 67 | SMP            | SMP           | SMP                  |\n | 68 | WOOL_GAMES     | WoolGames     | Wool Wars            |\n\n### Storage\nGames store their respective stats and data in a Player's `stats` collection. The game's specific data is held within a JSON object named after it's `Database Name` (seen above.)\n### GameType Notes\n* Clean names are what is displayed to the user when referencing the name.\n* Database names or IDs are used when the API references a specific GameType.\n## Notes\n\n### Date and Time\nGenerally dates are stored as a Unix Epoch times in milliseconds.\n### Response Format\nResponses are served in JSON format.\n### UUID Parameters\nAll uuid parameters support both dashed and undashed versions.\n### SkyBlock items and inventories\nItems and inventory data are stored as a base64 encoded string containing gzipped nbt data.\nIf a method is missing important information about an item or inventory, you should try checking this!\n>Note: the base64 string may contain a unicode escape for non-alphabetical symbols, and some programming languages may have silent defects when interpreting the string. \n\n# Authentication\n\n<!-- ReDoc-Inject: <security-definitions> -->"
+  description: '# Introduction
+
+    This is the official Hypixel API documentation.'
   version: v2
   termsOfService: https://hypixel.net/tos
   contact:
@@ -315,7 +317,7 @@ paths:
       description: News
   /v2/skyblock/auction:
     get:
-      summary: Hypixel Request Auction(s) by the Auction UUID, Player UUID, or Profile UUID.
+      summary: Hypixel Request Auction(s) by the Auction UUID, Player UUID, or Profile UUID
       description: Returns the auctions selected by the provided query. Only one query parameter can be used in a single request, and cannot be filtered by multiple.
       tags:
       - SkyBlock
@@ -493,7 +495,31 @@ paths:
   /v2/skyblock/bazaar:
     get:
       summary: Hypixel Bazaar
-      description: "Returns the list of products along with their sell summary, buy summary and quick status.\n ### Product Description\n The returned product info has 3 main fields:\n - `buy_summary`\n - `sell_summary`\n - `quick_status`\n\n`buy_summary` and `sell_summary` are the current top 30 orders for each transaction type (in-game example: [Stock of Stonks](https://i.imgur.com/SjRONxq.png)).\n\n`quick_status` is a computed summary of the live state of the product (used for advanced mode view in the bazaar):\n- `sellVolume` and `buyVolume` are the sum of item amounts in all orders.\n - `sellPrice` and `buyPrice` are the weighted average of the top 2% of orders by volume.\n - `movingWeek` is the historic transacted volume from last 7d + live state.\n - `sellOrders` and `buyOrders` are the count of active orders. "
+      description: 'Returns the list of products along with their sell summary, buy summary and quick status.
+
+        ### Product Description
+
+        The returned product info has 3 main fields:
+
+        - `buy_summary`
+
+        - `sell_summary`
+
+        - `quick_status`
+
+
+        `buy_summary` and `sell_summary` are the current top 30 orders for each transaction type (in-game example: Stock of Stonks).
+
+
+        `quick_status` is a computed summary of the live state of the product (used for advanced mode view in the bazaar):
+
+        - `sellVolume` and `buyVolume` are the sum of item amounts in all orders.
+
+        - `sellPrice` and `buyPrice` are the weighted average of the top 2% of orders by volume.
+
+        - `movingWeek` is the historic transacted volume from last 7d + live state.
+
+        - `sellOrders` and `buyOrders` are the count of active orders.'
       tags:
       - SkyBlock
       responses:
@@ -905,8 +931,8 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
-    InvalidKey:
-      description: Access is forbidden, usually due to an invalid API key being used.
+    DataMissing:
+      description: Some data is missing, this is usually a field.
       content:
         application/json:
           schema:
@@ -917,20 +943,7 @@ components:
                 example: false
               cause:
                 type: string
-                example: Invalid API key
-    NotPopulated:
-      description: The data is not yet populated and should be available shortly
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Leaderboard data has not yet been populated
+                example: Missing one or more fields [...]
     NoResult:
       description: The request responded with no result.
       content:
@@ -957,6 +970,58 @@ components:
               cause:
                 type: string
                 example: Page not found
+    InvalidKey:
+      description: Access is forbidden, usually due to an invalid API key being used.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Invalid API key
+    InvalidPage:
+      description: The page provided is invalid.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Invalid page
+    NotPopulated:
+      description: The data is not yet populated and should be available shortly
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Leaderboard data has not yet been populated
+    MalformedData:
+      description: Some data provided is invalid.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Malformed UUID
     RateLimited:
       description: A request limit has been reached, usually this is due to the limit on the key being reached but can also be triggered by a global throttle.
       content:
@@ -977,215 +1042,7 @@ components:
                 type: boolean
                 description: When this boolean exists and is true, the throttle occurring is a global throttle applied to all users
                 example: true
-    MalformedData:
-      description: Some data provided is invalid.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Malformed UUID
-    InvalidPage:
-      description: The page provided is invalid.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Invalid page
-    DataMissing:
-      description: Some data is missing, this is usually a field.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Missing one or more fields [...]
   schemas:
-    SkyBlockFireSale:
-      properties:
-        item_id:
-          description: The SkyBlock item ID for this sale
-          type: string
-          example: '500123'
-        start:
-          description: The start time in unix milliseconds for the sale
-          type: number
-          example: 1.0
-        end:
-          description: The end time in unix milliseconds for the sale
-          type: number
-          example: 1.0
-        amount:
-          description: The amount of items available for this sale
-          type: integer
-          example: 42
-        price:
-          description: The price in Gems for this sale
-          type: integer
-          example: 42
-    SkyBlockItem:
-      properties:
-        id:
-          description: The unique identifier for this item
-          type: string
-          example: '500123'
-        material:
-          description: The Bukkit material enum value for the item
-          type: string
-          example: example
-        name:
-          description: The name of the item
-          type: string
-          example: ExamplePlayer
-        tier:
-          description: The rarity tier of the item
-          type: string
-          enum:
-          - COMMON
-          - UNCOMMON
-          - RARE
-          - EPIC
-          - LEGENDARY
-          - MYTHIC
-          - SUPREME
-          - SPECIAL
-          - VERY_SPECIAL
-          example: COMMON
-        color:
-          description: The color metadata to be applied to an item, usually leather armor pieces
-          pattern: ^(?:(?:^|,\s*)([01]?\d\d?|2[0-4]\d|25[0-5])){3}$
-          type: string
-          example: example
-        skin:
-          description: The skin value for a skull based item
-          type: string
-          example: example
-      example:
-        material: LEATHER_CHESTPLATE
-        color: 255,215,0
-        name: Farm Armor Chestplate
-        category: CHESTPLATE
-        tier: RARE
-        stats:
-          DEFENSE: 75
-          HEALTH: 20
-        npc_sell_price: 5200
-        id: FARM_ARMOR_CHESTPLATE
-    SkyBlockMuseum:
-      properties:
-        value:
-          type: integer
-          format: int64
-          example: 1748544600000
-        appraisal:
-          type: boolean
-          example: true
-        items:
-          type: object
-        special:
-          type: array
-          properties:
-            donated_time:
-              type: integer
-              format: int64
-              example: 1748544600000
-            items:
-              type: object
-    SkyBlockProfile:
-      properties:
-        profile_id:
-          type: string
-          format: uuid
-          example: ad8fefaa8351454bb739a4eaa872173f
-        members:
-          description: A map of member UUIDs to member profiles objects
-          type: object
-          properties:
-            player_id:
-              type: string
-              format: uuid
-              example: ad8fefaa8351454bb739a4eaa872173f
-            profile:
-              type: object
-              properties:
-                deletion_notice:
-                  description: If this field exists, the member profile is marked as deleted
-                  nullable: true
-                  type: object
-                  properties:
-                    timestamp:
-                      type: integer
-                      format: int64
-                      example: 1748544600000
-        cute_name:
-          description: The cute name of the profile, only provided on the profiles endpoint
-          nullable: true
-          type: string
-          example: ExamplePlayer
-        selected:
-          description: Whether or not this is the currently selected profile, only provided on the profiles endpoint
-          nullable: true
-          type: boolean
-          example: true
-        community_upgrades:
-          nullable: true
-          type: object
-        banking:
-          description: Information about the bank account for this profile, only present if the API banking setting is enabled
-          nullable: true
-          type: object
-          properties:
-            balance:
-              type: number
-              format: double
-              example: 1.0
-            transactions:
-              type: array
-              items:
-                type: object
-                properties:
-                  timestamp:
-                    type: integer
-                    format: int64
-                    example: 1748544600000
-                  action:
-                    type: string
-                    enum:
-                    - DEPOSIT
-                    - WITHDRAW
-                    example: DEPOSIT
-                  initiator_name:
-                    type: string
-                    example: ExamplePlayer
-                  amount:
-                    type: number
-                    format: double
-                    example: 1.0
-        game_mode:
-          description: The SkyBlock game mode of the profile, not present if normal mode
-          nullable: true
-          type: string
-          enum:
-          - ironman
-          - island
-          - bingo
-          example: ironman
     SkyBlockGarden:
       description: Information about a player's SkyBlock garden, the only guaranteed field is the `uuid` field.
       required:
@@ -1312,6 +1169,111 @@ components:
         selected_barn_skin:
           type: string
           example: example
+    SkyBlockProfile:
+      properties:
+        profile_id:
+          type: string
+          format: uuid
+          example: ad8fefaa8351454bb739a4eaa872173f
+        members:
+          description: A map of member UUIDs to member profiles objects
+          type: object
+          properties:
+            player_id:
+              type: string
+              format: uuid
+              example: ad8fefaa8351454bb739a4eaa872173f
+            profile:
+              type: object
+              properties:
+                deletion_notice:
+                  description: If this field exists, the member profile is marked as deleted
+                  type:
+                  - object
+                  - 'null'
+                  properties:
+                    timestamp:
+                      type: integer
+                      format: int64
+                      example: 1748544600000
+        cute_name:
+          description: The cute name of the profile, only provided on the profiles endpoint
+          type:
+          - string
+          - 'null'
+          example: ExamplePlayer
+        selected:
+          description: Whether or not this is the currently selected profile, only provided on the profiles endpoint
+          type:
+          - boolean
+          - 'null'
+          example: true
+        community_upgrades:
+          type:
+          - object
+          - 'null'
+        banking:
+          description: Information about the bank account for this profile, only present if the API banking setting is enabled
+          type:
+          - object
+          - 'null'
+          properties:
+            balance:
+              type: number
+              format: double
+              example: 1.0
+            transactions:
+              type: array
+              items:
+                type: object
+                properties:
+                  timestamp:
+                    type: integer
+                    format: int64
+                    example: 1748544600000
+                  action:
+                    type: string
+                    enum:
+                    - DEPOSIT
+                    - WITHDRAW
+                    example: DEPOSIT
+                  initiator_name:
+                    type: string
+                    example: ExamplePlayer
+                  amount:
+                    type: number
+                    format: double
+                    example: 1.0
+        game_mode:
+          description: The SkyBlock game mode of the profile, not present if normal mode
+          type:
+          - string
+          - 'null'
+          enum:
+          - ironman
+          - island
+          - bingo
+          example: ironman
+    SkyBlockMuseum:
+      properties:
+        value:
+          type: integer
+          format: int64
+          example: 1748544600000
+        appraisal:
+          type: boolean
+          example: true
+        items:
+          type: object
+        special:
+          type: array
+          properties:
+            donated_time:
+              type: integer
+              format: int64
+              example: 1748544600000
+            items:
+              type: object
     SkyBlockAuction:
       properties:
         _id:
@@ -1428,6 +1390,76 @@ components:
           profile_id: 99748e629dee463892f68abf3a780094
           amount: 7607533
           timestamp: 1573760824844
+    SkyBlockItem:
+      properties:
+        id:
+          description: The unique identifier for this item
+          type: string
+          example: '500123'
+        material:
+          description: The Bukkit material enum value for the item
+          type: string
+          example: example
+        name:
+          description: The name of the item
+          type: string
+          example: ExamplePlayer
+        tier:
+          description: The rarity tier of the item
+          type: string
+          enum:
+          - COMMON
+          - UNCOMMON
+          - RARE
+          - EPIC
+          - LEGENDARY
+          - MYTHIC
+          - SUPREME
+          - SPECIAL
+          - VERY_SPECIAL
+          example: COMMON
+        color:
+          description: The color metadata to be applied to an item, usually leather armor pieces
+          pattern: ^(?:(?:^|,\s*)([01]?\d\d?|2[0-4]\d|25[0-5])){3}$
+          type: string
+          example: example
+        skin:
+          description: The skin value for a skull based item
+          type: string
+          example: example
+      example:
+        material: LEATHER_CHESTPLATE
+        color: 255,215,0
+        name: Farm Armor Chestplate
+        category: CHESTPLATE
+        tier: RARE
+        stats:
+          DEFENSE: 75
+          HEALTH: 20
+        npc_sell_price: 5200
+        id: FARM_ARMOR_CHESTPLATE
+    SkyBlockFireSale:
+      properties:
+        item_id:
+          description: The SkyBlock item ID for this sale
+          type: string
+          example: '500123'
+        start:
+          description: The start time in unix milliseconds for the sale
+          type: number
+          example: 1.0
+        end:
+          description: The end time in unix milliseconds for the sale
+          type: number
+          example: 1.0
+        amount:
+          description: The amount of items available for this sale
+          type: integer
+          example: 42
+        price:
+          description: The price in Gems for this sale
+          type: integer
+          example: 42
   securitySchemes:
     ApiKey:
       type: apiKey

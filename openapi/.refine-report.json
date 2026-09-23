@@ -1,11 +1,7 @@
 {
   "provider": "hypixel",
   "sources": [
-    "hypixel-housing-api-openapi.yml",
-    "hypixel-other-api-openapi.yml",
-    "hypixel-player-data-api-openapi.yml",
-    "hypixel-resources-api-openapi.yml",
-    "hypixel-skyblock-api-openapi.yml"
+    "_original/hypixel-public-api-openapi.json"
   ],
   "outputs": [
     "hypixel-housing-api-openapi.yml",
@@ -17,6 +13,18 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "1 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "hypixel-public-api-openapi.json: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "_original/hypixel-public-api-openapi.yml: archived document superseded by a larger archived document",
+    "hypixel-housing-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "hypixel-other-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "hypixel-player-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "hypixel-resources-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "hypixel-skyblock-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
