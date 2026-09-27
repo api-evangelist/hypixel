@@ -930,245 +930,77 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    DataMissing:
-      description: Some data is missing, this is usually a field.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Missing one or more fields [...]
-    NoResult:
-      description: The request responded with no result.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: No result was found
-    MissingPage:
-      description: The page provided does not exist.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Page not found
-    InvalidKey:
-      description: Access is forbidden, usually due to an invalid API key being used.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Invalid API key
-    InvalidPage:
-      description: The page provided is invalid.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Invalid page
-    NotPopulated:
-      description: The data is not yet populated and should be available shortly
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Leaderboard data has not yet been populated
-    MalformedData:
-      description: Some data provided is invalid.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Malformed UUID
-    RateLimited:
-      description: A request limit has been reached, usually this is due to the limit on the key being reached but can also be triggered by a global throttle.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Key throttle
-              throttle:
-                type: boolean
-                example: true
-              global:
-                type: boolean
-                description: When this boolean exists and is true, the throttle occurring is a global throttle applied to all users
-                example: true
   schemas:
-    SkyBlockGarden:
-      description: Information about a player's SkyBlock garden, the only guaranteed field is the `uuid` field.
-      required:
-      - uuid
+    SkyBlockFireSale:
       properties:
-        uuid:
+        item_id:
+          description: The SkyBlock item ID for this sale
           type: string
-          format: uuid
-          description: The UUID of the profile for this garden.
-          example: ad8fefaa8351454bb739a4eaa872173f
-        commission_data:
-          type: object
-          properties:
-            visits:
-              type: object
-              description: A map of visitor identifier to visit count
-              example:
-                jerry: 1
-                jacob: 2
-                andrew: 3
-            completed:
-              type: object
-              description: A map of visitor identifier to completed count
-              example:
-                jerry: 1
-                jacob: 1
-                andrew: 2
-            total_completed:
-              type: integer
-              format: int32
-              example: 42
-            unique_npcs_served:
-              type: integer
-              format: int32
-              example: 42
-        composter_data:
-          type: object
-          example:
-            organic_matter: 1772.8
-            fuel_units: 17000
-            compost_units: 0
-            compost_items: 2
-            conversion_ticks: 300
-            last_save: 1721039418436
-            upgrades:
-              speed: 25
-              multi_drop: 25
-              fuel_cap: 22
-              organic_matter_cap: 25
-              cost_reduction: 25
-        active_commissions:
-          type: object
-          example:
-            liam:
-              requirement:
-              - original_item: NETHER_STALK
-                original_amount: 93995
-                item: MUTANT_NETHER_STALK
-                amount: 4
-              status: NOT_STARTED
-              position: 1
-            lumberjack:
-              requirement:
-              - original_item: POTATO_ITEM
-                original_amount: 81380
-                item: ENCHANTED_BAKED_POTATO
-                amount: 3
-              status: NOT_STARTED
-              position: 2
-            oringo:
-              requirement:
-              - original_item: WHEAT
-                original_amount: 26798
-                item: ENCHANTED_HAY_BLOCK
-                amount: 21
-              status: NOT_STARTED
-              position: 3
-            rhys:
-              requirement:
-              - original_item: JACK_O_LANTERN
-                original_amount: 512
-                item: JACK_O_LANTERN
-                amount: 512
-              status: NOT_STARTED
-              position: 4
-            fear_mongerer:
-              requirement:
-              - original_item: PUMPKIN
-                original_amount: 27709
-                item: POLISHED_PUMPKIN
-                amount: 1
-              status: NOT_STARTED
-              position: 5
-              extra_rewards:
-              - candy: PURPLE_CANDY
-        resources_collected:
-          type: object
-          description: A map of resource ID to amount collected
-          example:
-            WHEAT: 100
-            POTATO_ITEM: 100
-            INK_SACK:3: 100
-        crop_upgrade_levels:
-          type: object
-          example:
-            WHEAT: 1
-            POTATO_ITEM: 2
-            INK_SACK:3: 3
-        unlocked_plots_ids:
-          type: array
-          items:
-            type: string
-          example:
-          - beginner_1
-          - intermediate_3
-        garden_experience:
+          example: '500123'
+        start:
+          description: The start time in unix milliseconds for the sale
+          type: number
+          example: 1.0
+        end:
+          description: The end time in unix milliseconds for the sale
+          type: number
+          example: 1.0
+        amount:
+          description: The amount of items available for this sale
           type: integer
-          format: double
           example: 42
-        unlocked_barn_skins:
-          type: array
-          items:
-            type: string
-        selected_barn_skin:
+        price:
+          description: The price in Gems for this sale
+          type: integer
+          example: 42
+    SkyBlockItem:
+      properties:
+        id:
+          description: The unique identifier for this item
+          type: string
+          example: '500123'
+        material:
+          description: The Bukkit material enum value for the item
           type: string
           example: example
+        name:
+          description: The name of the item
+          type: string
+          example: ExamplePlayer
+        tier:
+          description: The rarity tier of the item
+          type: string
+          enum:
+          - COMMON
+          - UNCOMMON
+          - RARE
+          - EPIC
+          - LEGENDARY
+          - MYTHIC
+          - SUPREME
+          - SPECIAL
+          - VERY_SPECIAL
+          example: COMMON
+        color:
+          description: The color metadata to be applied to an item, usually leather armor pieces
+          pattern: ^(?:(?:^|,\s*)([01]?\d\d?|2[0-4]\d|25[0-5])){3}$
+          type: string
+          example: example
+        skin:
+          description: The skin value for a skull based item
+          type: string
+          example: example
+      example:
+        material: LEATHER_CHESTPLATE
+        color: 255,215,0
+        name: Farm Armor Chestplate
+        category: CHESTPLATE
+        tier: RARE
+        stats:
+          DEFENSE: 75
+          HEALTH: 20
+        npc_sell_price: 5200
+        id: FARM_ARMOR_CHESTPLATE
     SkyBlockProfile:
       properties:
         profile_id:
@@ -1390,76 +1222,244 @@ components:
           profile_id: 99748e629dee463892f68abf3a780094
           amount: 7607533
           timestamp: 1573760824844
-    SkyBlockItem:
+    SkyBlockGarden:
+      description: Information about a player's SkyBlock garden, the only guaranteed field is the `uuid` field.
+      required:
+      - uuid
       properties:
-        id:
-          description: The unique identifier for this item
+        uuid:
           type: string
-          example: '500123'
-        material:
-          description: The Bukkit material enum value for the item
-          type: string
-          example: example
-        name:
-          description: The name of the item
-          type: string
-          example: ExamplePlayer
-        tier:
-          description: The rarity tier of the item
-          type: string
-          enum:
-          - COMMON
-          - UNCOMMON
-          - RARE
-          - EPIC
-          - LEGENDARY
-          - MYTHIC
-          - SUPREME
-          - SPECIAL
-          - VERY_SPECIAL
-          example: COMMON
-        color:
-          description: The color metadata to be applied to an item, usually leather armor pieces
-          pattern: ^(?:(?:^|,\s*)([01]?\d\d?|2[0-4]\d|25[0-5])){3}$
-          type: string
-          example: example
-        skin:
-          description: The skin value for a skull based item
-          type: string
-          example: example
-      example:
-        material: LEATHER_CHESTPLATE
-        color: 255,215,0
-        name: Farm Armor Chestplate
-        category: CHESTPLATE
-        tier: RARE
-        stats:
-          DEFENSE: 75
-          HEALTH: 20
-        npc_sell_price: 5200
-        id: FARM_ARMOR_CHESTPLATE
-    SkyBlockFireSale:
-      properties:
-        item_id:
-          description: The SkyBlock item ID for this sale
-          type: string
-          example: '500123'
-        start:
-          description: The start time in unix milliseconds for the sale
-          type: number
-          example: 1.0
-        end:
-          description: The end time in unix milliseconds for the sale
-          type: number
-          example: 1.0
-        amount:
-          description: The amount of items available for this sale
+          format: uuid
+          description: The UUID of the profile for this garden.
+          example: ad8fefaa8351454bb739a4eaa872173f
+        commission_data:
+          type: object
+          properties:
+            visits:
+              type: object
+              description: A map of visitor identifier to visit count
+              example:
+                jerry: 1
+                jacob: 2
+                andrew: 3
+            completed:
+              type: object
+              description: A map of visitor identifier to completed count
+              example:
+                jerry: 1
+                jacob: 1
+                andrew: 2
+            total_completed:
+              type: integer
+              format: int32
+              example: 42
+            unique_npcs_served:
+              type: integer
+              format: int32
+              example: 42
+        composter_data:
+          type: object
+          example:
+            organic_matter: 1772.8
+            fuel_units: 17000
+            compost_units: 0
+            compost_items: 2
+            conversion_ticks: 300
+            last_save: 1721039418436
+            upgrades:
+              speed: 25
+              multi_drop: 25
+              fuel_cap: 22
+              organic_matter_cap: 25
+              cost_reduction: 25
+        active_commissions:
+          type: object
+          example:
+            liam:
+              requirement:
+              - original_item: NETHER_STALK
+                original_amount: 93995
+                item: MUTANT_NETHER_STALK
+                amount: 4
+              status: NOT_STARTED
+              position: 1
+            lumberjack:
+              requirement:
+              - original_item: POTATO_ITEM
+                original_amount: 81380
+                item: ENCHANTED_BAKED_POTATO
+                amount: 3
+              status: NOT_STARTED
+              position: 2
+            oringo:
+              requirement:
+              - original_item: WHEAT
+                original_amount: 26798
+                item: ENCHANTED_HAY_BLOCK
+                amount: 21
+              status: NOT_STARTED
+              position: 3
+            rhys:
+              requirement:
+              - original_item: JACK_O_LANTERN
+                original_amount: 512
+                item: JACK_O_LANTERN
+                amount: 512
+              status: NOT_STARTED
+              position: 4
+            fear_mongerer:
+              requirement:
+              - original_item: PUMPKIN
+                original_amount: 27709
+                item: POLISHED_PUMPKIN
+                amount: 1
+              status: NOT_STARTED
+              position: 5
+              extra_rewards:
+              - candy: PURPLE_CANDY
+        resources_collected:
+          type: object
+          description: A map of resource ID to amount collected
+          example:
+            WHEAT: 100
+            POTATO_ITEM: 100
+            INK_SACK:3: 100
+        crop_upgrade_levels:
+          type: object
+          example:
+            WHEAT: 1
+            POTATO_ITEM: 2
+            INK_SACK:3: 3
+        unlocked_plots_ids:
+          type: array
+          items:
+            type: string
+          example:
+          - beginner_1
+          - intermediate_3
+        garden_experience:
           type: integer
+          format: double
           example: 42
-        price:
-          description: The price in Gems for this sale
-          type: integer
-          example: 42
+        unlocked_barn_skins:
+          type: array
+          items:
+            type: string
+        selected_barn_skin:
+          type: string
+          example: example
+  responses:
+    MalformedData:
+      description: Some data provided is invalid.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Malformed UUID
+    NoResult:
+      description: The request responded with no result.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: No result was found
+    NotPopulated:
+      description: The data is not yet populated and should be available shortly
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Leaderboard data has not yet been populated
+    DataMissing:
+      description: Some data is missing, this is usually a field.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Missing one or more fields [...]
+    InvalidPage:
+      description: The page provided is invalid.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Invalid page
+    RateLimited:
+      description: A request limit has been reached, usually this is due to the limit on the key being reached but can also be triggered by a global throttle.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Key throttle
+              throttle:
+                type: boolean
+                example: true
+              global:
+                type: boolean
+                description: When this boolean exists and is true, the throttle occurring is a global throttle applied to all users
+                example: true
+    InvalidKey:
+      description: Access is forbidden, usually due to an invalid API key being used.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Invalid API key
+    MissingPage:
+      description: The page provided does not exist.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Page not found
   securitySchemes:
     ApiKey:
       type: apiKey

@@ -207,63 +207,7 @@ paths:
         dispatcher: FALLBACK
       description: Punishment Statistics
 components:
-  responses:
-    InvalidKey:
-      description: Access is forbidden, usually due to an invalid API key being used.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Invalid API key
-    NotPopulated:
-      description: The data is not yet populated and should be available shortly
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Leaderboard data has not yet been populated
-    RateLimited:
-      description: A request limit has been reached, usually this is due to the limit on the key being reached but can also be triggered by a global throttle.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Key throttle
-              throttle:
-                type: boolean
-                example: true
-              global:
-                type: boolean
-                description: When this boolean exists and is true, the throttle occurring is a global throttle applied to all users
-                example: true
   schemas:
-    QueuedBooster:
-      allOf:
-      - $ref: '#/components/schemas/Booster'
-      - type: object
-        properties:
-          stacked:
-            type:
-            - boolean
-            - 'null'
     ActiveBooster:
       allOf:
       - $ref: '#/components/schemas/Booster'
@@ -304,6 +248,62 @@ components:
           type: integer
           format: int64
           example: 1748544600000
+    QueuedBooster:
+      allOf:
+      - $ref: '#/components/schemas/Booster'
+      - type: object
+        properties:
+          stacked:
+            type:
+            - boolean
+            - 'null'
+  responses:
+    NotPopulated:
+      description: The data is not yet populated and should be available shortly
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Leaderboard data has not yet been populated
+    RateLimited:
+      description: A request limit has been reached, usually this is due to the limit on the key being reached but can also be triggered by a global throttle.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Key throttle
+              throttle:
+                type: boolean
+                example: true
+              global:
+                type: boolean
+                description: When this boolean exists and is true, the throttle occurring is a global throttle applied to all users
+                example: true
+    InvalidKey:
+      description: Access is forbidden, usually due to an invalid API key being used.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Invalid API key
   securitySchemes:
     ApiKey:
       type: apiKey

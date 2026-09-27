@@ -330,6 +330,19 @@ paths:
       description: Retrieve a Guild by a player, id, or name
 components:
   responses:
+    InvalidKey:
+      description: Access is forbidden, usually due to an invalid API key being used.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Invalid API key
     DataMissing:
       description: Some data is missing, this is usually a field.
       content:
@@ -356,19 +369,6 @@ components:
               cause:
                 type: string
                 example: Malformed UUID
-    InvalidKey:
-      description: Access is forbidden, usually due to an invalid API key being used.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Invalid API key
     RateLimited:
       description: A request limit has been reached, usually this is due to the limit on the key being reached but can also be triggered by a global throttle.
       content:
