@@ -207,21 +207,54 @@ paths:
         dispatcher: FALLBACK
       description: Punishment Statistics
 components:
+  responses:
+    RateLimited:
+      description: A request limit has been reached, usually this is due to the limit on the key being reached but can also be triggered by a global throttle.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Key throttle
+              throttle:
+                type: boolean
+                example: true
+              global:
+                type: boolean
+                description: When this boolean exists and is true, the throttle occurring is a global throttle applied to all users
+                example: true
+    NotPopulated:
+      description: The data is not yet populated and should be available shortly
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Leaderboard data has not yet been populated
+    InvalidKey:
+      description: Access is forbidden, usually due to an invalid API key being used.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Invalid API key
   schemas:
-    ActiveBooster:
-      allOf:
-      - $ref: '#/components/schemas/Booster'
-      - type: object
-        properties:
-          stacked:
-            type:
-            - array
-            - 'null'
-            items:
-              type: string
-              description: UUID of the player in a dashed format
-              format: uuid
-              example: ad8fefaa-8351-454b-b739-a4eaa872173f
     Booster:
       properties:
         _id:
@@ -248,6 +281,20 @@ components:
           type: integer
           format: int64
           example: 1748544600000
+    ActiveBooster:
+      allOf:
+      - $ref: '#/components/schemas/Booster'
+      - type: object
+        properties:
+          stacked:
+            type:
+            - array
+            - 'null'
+            items:
+              type: string
+              description: UUID of the player in a dashed format
+              format: uuid
+              example: ad8fefaa-8351-454b-b739-a4eaa872173f
     QueuedBooster:
       allOf:
       - $ref: '#/components/schemas/Booster'
@@ -257,53 +304,6 @@ components:
             type:
             - boolean
             - 'null'
-  responses:
-    NotPopulated:
-      description: The data is not yet populated and should be available shortly
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Leaderboard data has not yet been populated
-    RateLimited:
-      description: A request limit has been reached, usually this is due to the limit on the key being reached but can also be triggered by a global throttle.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Key throttle
-              throttle:
-                type: boolean
-                example: true
-              global:
-                type: boolean
-                description: When this boolean exists and is true, the throttle occurring is a global throttle applied to all users
-                example: true
-    InvalidKey:
-      description: Access is forbidden, usually due to an invalid API key being used.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Invalid API key
   securitySchemes:
     ApiKey:
       type: apiKey

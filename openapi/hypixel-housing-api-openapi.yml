@@ -133,19 +133,6 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
-    InvalidKey:
-      description: Access is forbidden, usually due to an invalid API key being used.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Invalid API key
     NoResult:
       description: The request responded with no result.
       content:
@@ -179,6 +166,19 @@ components:
                 type: boolean
                 description: When this boolean exists and is true, the throttle occurring is a global throttle applied to all users
                 example: true
+    InvalidKey:
+      description: Access is forbidden, usually due to an invalid API key being used.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Invalid API key
   schemas:
     HousingHouse:
       description: Information about a player's house.
