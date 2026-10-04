@@ -207,6 +207,56 @@ paths:
         dispatcher: FALLBACK
       description: Punishment Statistics
 components:
+  schemas:
+    QueuedBooster:
+      allOf:
+      - $ref: '#/components/schemas/Booster'
+      - type: object
+        properties:
+          stacked:
+            type:
+            - boolean
+            - 'null'
+    ActiveBooster:
+      allOf:
+      - $ref: '#/components/schemas/Booster'
+      - type: object
+        properties:
+          stacked:
+            type:
+            - array
+            - 'null'
+            items:
+              type: string
+              description: UUID of the player in a dashed format
+              format: uuid
+              example: ad8fefaa-8351-454b-b739-a4eaa872173f
+    Booster:
+      properties:
+        _id:
+          type: string
+          format: objectid
+          example: 5fcbf9d9d295e80a766f3b14
+        purchaserUuid:
+          type: string
+          format: uuid
+          example: ad8fefaa8351454bb739a4eaa872173f
+        amount:
+          type: number
+          example: 1.0
+        originalLength:
+          type: integer
+          example: 42
+        length:
+          type: integer
+          example: 42
+        gameType:
+          type: integer
+          example: 42
+        dateActivated:
+          type: integer
+          format: int64
+          example: 1748544600000
   responses:
     RateLimited:
       description: A request limit has been reached, usually this is due to the limit on the key being reached but can also be triggered by a global throttle.
@@ -254,56 +304,6 @@ components:
               cause:
                 type: string
                 example: Invalid API key
-  schemas:
-    Booster:
-      properties:
-        _id:
-          type: string
-          format: objectid
-          example: 5fcbf9d9d295e80a766f3b14
-        purchaserUuid:
-          type: string
-          format: uuid
-          example: ad8fefaa8351454bb739a4eaa872173f
-        amount:
-          type: number
-          example: 1.0
-        originalLength:
-          type: integer
-          example: 42
-        length:
-          type: integer
-          example: 42
-        gameType:
-          type: integer
-          example: 42
-        dateActivated:
-          type: integer
-          format: int64
-          example: 1748544600000
-    ActiveBooster:
-      allOf:
-      - $ref: '#/components/schemas/Booster'
-      - type: object
-        properties:
-          stacked:
-            type:
-            - array
-            - 'null'
-            items:
-              type: string
-              description: UUID of the player in a dashed format
-              format: uuid
-              example: ad8fefaa-8351-454b-b739-a4eaa872173f
-    QueuedBooster:
-      allOf:
-      - $ref: '#/components/schemas/Booster'
-      - type: object
-        properties:
-          stacked:
-            type:
-            - boolean
-            - 'null'
   securitySchemes:
     ApiKey:
       type: apiKey

@@ -930,119 +930,29 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    MalformedData:
-      description: Some data provided is invalid.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Malformed UUID
-    RateLimited:
-      description: A request limit has been reached, usually this is due to the limit on the key being reached but can also be triggered by a global throttle.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Key throttle
-              throttle:
-                type: boolean
-                example: true
-              global:
-                type: boolean
-                description: When this boolean exists and is true, the throttle occurring is a global throttle applied to all users
-                example: true
-    NoResult:
-      description: The request responded with no result.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: No result was found
-    NotPopulated:
-      description: The data is not yet populated and should be available shortly
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Leaderboard data has not yet been populated
-    MissingPage:
-      description: The page provided does not exist.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Page not found
-    DataMissing:
-      description: Some data is missing, this is usually a field.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Missing one or more fields [...]
-    InvalidPage:
-      description: The page provided is invalid.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Invalid page
-    InvalidKey:
-      description: Access is forbidden, usually due to an invalid API key being used.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Invalid API key
   schemas:
+    SkyBlockFireSale:
+      properties:
+        item_id:
+          description: The SkyBlock item ID for this sale
+          type: string
+          example: '500123'
+        start:
+          description: The start time in unix milliseconds for the sale
+          type: number
+          example: 1.0
+        end:
+          description: The end time in unix milliseconds for the sale
+          type: number
+          example: 1.0
+        amount:
+          description: The amount of items available for this sale
+          type: integer
+          example: 42
+        price:
+          description: The price in Gems for this sale
+          type: integer
+          example: 42
     SkyBlockMuseum:
       properties:
         value:
@@ -1063,6 +973,91 @@ components:
               example: 1748544600000
             items:
               type: object
+    SkyBlockProfile:
+      properties:
+        profile_id:
+          type: string
+          format: uuid
+          example: ad8fefaa8351454bb739a4eaa872173f
+        members:
+          description: A map of member UUIDs to member profiles objects
+          type: object
+          properties:
+            player_id:
+              type: string
+              format: uuid
+              example: ad8fefaa8351454bb739a4eaa872173f
+            profile:
+              type: object
+              properties:
+                deletion_notice:
+                  description: If this field exists, the member profile is marked as deleted
+                  type:
+                  - object
+                  - 'null'
+                  properties:
+                    timestamp:
+                      type: integer
+                      format: int64
+                      example: 1748544600000
+        cute_name:
+          description: The cute name of the profile, only provided on the profiles endpoint
+          type:
+          - string
+          - 'null'
+          example: ExamplePlayer
+        selected:
+          description: Whether or not this is the currently selected profile, only provided on the profiles endpoint
+          type:
+          - boolean
+          - 'null'
+          example: true
+        community_upgrades:
+          type:
+          - object
+          - 'null'
+        banking:
+          description: Information about the bank account for this profile, only present if the API banking setting is enabled
+          type:
+          - object
+          - 'null'
+          properties:
+            balance:
+              type: number
+              format: double
+              example: 1.0
+            transactions:
+              type: array
+              items:
+                type: object
+                properties:
+                  timestamp:
+                    type: integer
+                    format: int64
+                    example: 1748544600000
+                  action:
+                    type: string
+                    enum:
+                    - DEPOSIT
+                    - WITHDRAW
+                    example: DEPOSIT
+                  initiator_name:
+                    type: string
+                    example: ExamplePlayer
+                  amount:
+                    type: number
+                    format: double
+                    example: 1.0
+        game_mode:
+          description: The SkyBlock game mode of the profile, not present if normal mode
+          type:
+          - string
+          - 'null'
+          enum:
+          - ironman
+          - island
+          - bingo
+          example: ironman
     SkyBlockAuction:
       properties:
         _id:
@@ -1179,113 +1174,54 @@ components:
           profile_id: 99748e629dee463892f68abf3a780094
           amount: 7607533
           timestamp: 1573760824844
-    SkyBlockProfile:
+    SkyBlockItem:
       properties:
-        profile_id:
-          type: string
-          format: uuid
-          example: ad8fefaa8351454bb739a4eaa872173f
-        members:
-          description: A map of member UUIDs to member profiles objects
-          type: object
-          properties:
-            player_id:
-              type: string
-              format: uuid
-              example: ad8fefaa8351454bb739a4eaa872173f
-            profile:
-              type: object
-              properties:
-                deletion_notice:
-                  description: If this field exists, the member profile is marked as deleted
-                  type:
-                  - object
-                  - 'null'
-                  properties:
-                    timestamp:
-                      type: integer
-                      format: int64
-                      example: 1748544600000
-        cute_name:
-          description: The cute name of the profile, only provided on the profiles endpoint
-          type:
-          - string
-          - 'null'
-          example: ExamplePlayer
-        selected:
-          description: Whether or not this is the currently selected profile, only provided on the profiles endpoint
-          type:
-          - boolean
-          - 'null'
-          example: true
-        community_upgrades:
-          type:
-          - object
-          - 'null'
-        banking:
-          description: Information about the bank account for this profile, only present if the API banking setting is enabled
-          type:
-          - object
-          - 'null'
-          properties:
-            balance:
-              type: number
-              format: double
-              example: 1.0
-            transactions:
-              type: array
-              items:
-                type: object
-                properties:
-                  timestamp:
-                    type: integer
-                    format: int64
-                    example: 1748544600000
-                  action:
-                    type: string
-                    enum:
-                    - DEPOSIT
-                    - WITHDRAW
-                    example: DEPOSIT
-                  initiator_name:
-                    type: string
-                    example: ExamplePlayer
-                  amount:
-                    type: number
-                    format: double
-                    example: 1.0
-        game_mode:
-          description: The SkyBlock game mode of the profile, not present if normal mode
-          type:
-          - string
-          - 'null'
-          enum:
-          - ironman
-          - island
-          - bingo
-          example: ironman
-    SkyBlockFireSale:
-      properties:
-        item_id:
-          description: The SkyBlock item ID for this sale
+        id:
+          description: The unique identifier for this item
           type: string
           example: '500123'
-        start:
-          description: The start time in unix milliseconds for the sale
-          type: number
-          example: 1.0
-        end:
-          description: The end time in unix milliseconds for the sale
-          type: number
-          example: 1.0
-        amount:
-          description: The amount of items available for this sale
-          type: integer
-          example: 42
-        price:
-          description: The price in Gems for this sale
-          type: integer
-          example: 42
+        material:
+          description: The Bukkit material enum value for the item
+          type: string
+          example: example
+        name:
+          description: The name of the item
+          type: string
+          example: ExamplePlayer
+        tier:
+          description: The rarity tier of the item
+          type: string
+          enum:
+          - COMMON
+          - UNCOMMON
+          - RARE
+          - EPIC
+          - LEGENDARY
+          - MYTHIC
+          - SUPREME
+          - SPECIAL
+          - VERY_SPECIAL
+          example: COMMON
+        color:
+          description: The color metadata to be applied to an item, usually leather armor pieces
+          pattern: ^(?:(?:^|,\s*)([01]?\d\d?|2[0-4]\d|25[0-5])){3}$
+          type: string
+          example: example
+        skin:
+          description: The skin value for a skull based item
+          type: string
+          example: example
+      example:
+        material: LEATHER_CHESTPLATE
+        color: 255,215,0
+        name: Farm Armor Chestplate
+        category: CHESTPLATE
+        tier: RARE
+        stats:
+          DEFENSE: 75
+          HEALTH: 20
+        npc_sell_price: 5200
+        id: FARM_ARMOR_CHESTPLATE
     SkyBlockGarden:
       description: Information about a player's SkyBlock garden, the only guaranteed field is the `uuid` field.
       required:
@@ -1412,54 +1348,118 @@ components:
         selected_barn_skin:
           type: string
           example: example
-    SkyBlockItem:
-      properties:
-        id:
-          description: The unique identifier for this item
-          type: string
-          example: '500123'
-        material:
-          description: The Bukkit material enum value for the item
-          type: string
-          example: example
-        name:
-          description: The name of the item
-          type: string
-          example: ExamplePlayer
-        tier:
-          description: The rarity tier of the item
-          type: string
-          enum:
-          - COMMON
-          - UNCOMMON
-          - RARE
-          - EPIC
-          - LEGENDARY
-          - MYTHIC
-          - SUPREME
-          - SPECIAL
-          - VERY_SPECIAL
-          example: COMMON
-        color:
-          description: The color metadata to be applied to an item, usually leather armor pieces
-          pattern: ^(?:(?:^|,\s*)([01]?\d\d?|2[0-4]\d|25[0-5])){3}$
-          type: string
-          example: example
-        skin:
-          description: The skin value for a skull based item
-          type: string
-          example: example
-      example:
-        material: LEATHER_CHESTPLATE
-        color: 255,215,0
-        name: Farm Armor Chestplate
-        category: CHESTPLATE
-        tier: RARE
-        stats:
-          DEFENSE: 75
-          HEALTH: 20
-        npc_sell_price: 5200
-        id: FARM_ARMOR_CHESTPLATE
+  responses:
+    NoResult:
+      description: The request responded with no result.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: No result was found
+    InvalidPage:
+      description: The page provided is invalid.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Invalid page
+    NotPopulated:
+      description: The data is not yet populated and should be available shortly
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Leaderboard data has not yet been populated
+    RateLimited:
+      description: A request limit has been reached, usually this is due to the limit on the key being reached but can also be triggered by a global throttle.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Key throttle
+              throttle:
+                type: boolean
+                example: true
+              global:
+                type: boolean
+                description: When this boolean exists and is true, the throttle occurring is a global throttle applied to all users
+                example: true
+    MissingPage:
+      description: The page provided does not exist.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Page not found
+    MalformedData:
+      description: Some data provided is invalid.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Malformed UUID
+    InvalidKey:
+      description: Access is forbidden, usually due to an invalid API key being used.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Invalid API key
+    DataMissing:
+      description: Some data is missing, this is usually a field.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Missing one or more fields [...]
   securitySchemes:
     ApiKey:
       type: apiKey

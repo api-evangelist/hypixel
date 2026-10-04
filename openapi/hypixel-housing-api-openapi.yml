@@ -146,6 +146,19 @@ components:
               cause:
                 type: string
                 example: No result was found
+    InvalidKey:
+      description: Access is forbidden, usually due to an invalid API key being used.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: Invalid API key
     RateLimited:
       description: A request limit has been reached, usually this is due to the limit on the key being reached but can also be triggered by a global throttle.
       content:
@@ -166,19 +179,6 @@ components:
                 type: boolean
                 description: When this boolean exists and is true, the throttle occurring is a global throttle applied to all users
                 example: true
-    InvalidKey:
-      description: Access is forbidden, usually due to an invalid API key being used.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: Invalid API key
   schemas:
     HousingHouse:
       description: Information about a player's house.
