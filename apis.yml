@@ -44,13 +44,13 @@ x-type: company
 x-tier: 3
 x-tier-reason: bulk-registered-from-public-apis
 tags:
-  - Games And Comics
   - Gaming
   - Minecraft
   - Player Stats
   - Leaderboards
   - SkyBlock
   - Public APIs
+  - Video Games
 apis:
 - aid: hypixel:hypixel-housing-api
   name: Hypixel Housing API
@@ -276,3 +276,5 @@ solutions:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-tags-removed:
+- Games And Comics
