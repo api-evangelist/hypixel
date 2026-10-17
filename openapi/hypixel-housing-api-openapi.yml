@@ -133,19 +133,6 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
-    NoResult:
-      description: The request responded with no result.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              cause:
-                type: string
-                example: No result was found
     InvalidKey:
       description: Access is forbidden, usually due to an invalid API key being used.
       content:
@@ -159,6 +146,19 @@ components:
               cause:
                 type: string
                 example: Invalid API key
+    NoResult:
+      description: The request responded with no result.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                example: false
+              cause:
+                type: string
+                example: No result was found
     RateLimited:
       description: A request limit has been reached, usually this is due to the limit on the key being reached but can also be triggered by a global throttle.
       content:
